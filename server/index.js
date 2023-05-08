@@ -3,6 +3,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const connectDB = require('./db');
 const productRoutes = require('./routes/productRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 dotenv.config();
 
@@ -12,7 +13,8 @@ const PORT = process.env.PORT;
 app.use(cors());
 app.use(express.json());
 
-app.use('/api/products', productRoutes);
+app.use('/api/products', productRoutes); // fetch all products
+app.use('/api/users', userRoutes);  // fetch all users
 
 app.get('/', (req, res) => {
     res.send('Server is running');
