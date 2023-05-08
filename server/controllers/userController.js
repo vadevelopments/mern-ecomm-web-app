@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const User = require('../models/User');
 
@@ -85,4 +86,4 @@ exports.deleteUserById = async (req, res) => {
         console.error(err.message);
         res.status(500).send('Server error');
     }
-};  
+}; 

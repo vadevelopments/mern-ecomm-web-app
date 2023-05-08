@@ -1,11 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
+const authController = require('../controllers/authController');
+const authMiddleware = require('../middleware/authMiddleware');
+
 
 // @route   GET api/users
 // @desc    Get all users
 // @access  Public
-router.get('/', userController.getAllUsers);
+router.get('/', authMiddleware, userController.getAllUsers);
 
 // @route   GET api/users/:id
 // @desc    Get user by ID
@@ -26,5 +29,10 @@ router.put('/:id', userController.updateUserById);
 // @desc    Delete user by ID
 // @access  Public
 router.delete('/:id', userController.deleteUserById);
+
+// @route   POST api/login
+// @desc    Login user
+// @access  Public
+router.post('/login', authController.loginUser);
 
 module.exports = router;
