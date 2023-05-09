@@ -36,6 +36,7 @@ async function createProduct(req, res) {
 			user: req.user.id
 		});
 		const newProduct = await product.save();
+		console.log('Product created successfully.');
 		res.status(201).json(newProduct);
 	} catch (err) {
 		console.error(err);
@@ -54,6 +55,7 @@ async function updateProductById(req, res) {
 		if (!product) {
 			res.status(404).json({ error: 'Product not found' });
 		} else {
+			console.log('Product updated successfully.');
 			res.json(product);
 		}
 	} catch (err) {
