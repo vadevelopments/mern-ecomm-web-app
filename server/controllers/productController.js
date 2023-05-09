@@ -28,11 +28,11 @@ async function createProduct(req, res) {
 	try {
 		const { name, description, price, image, countInStock } = req.body;
 		const product = new Product({
-		name,
-		description,
-		price,
-		image,
-		countInStock,
+			name,
+			description,
+			price,
+			image,
+			countInStock,
 		});
 		const newProduct = await product.save();
 		res.status(201).json(newProduct);

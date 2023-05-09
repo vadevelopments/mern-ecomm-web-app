@@ -4,6 +4,7 @@ const dotenv = require('dotenv');
 const connectDB = require('./db');
 const productRoutes = require('./routes/productRoutes');
 const userRoutes = require('./routes/userRoutes');
+const authRoutes = require('./routes/authRoutes');
 
 dotenv.config();
 
@@ -15,6 +16,7 @@ app.use(express.json());
 
 app.use('/api/products', productRoutes); // fetch all products
 app.use('/api/users', userRoutes);  // fetch all users
+app.use('/api/auth', authRoutes); // for auth
 
 app.get('/', (req, res) => {
     res.send('Server is running');

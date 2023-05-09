@@ -30,9 +30,9 @@ router.put('/:id', userController.updateUserById);
 // @access  Public
 router.delete('/:id', userController.deleteUserById);
 
-// @route   POST api/login
-// @desc    Login user
-// @access  Public
-router.post('/login', authController.loginUser);
+// // @route   POST api/login
+// // @desc    Login user
+// // @access  Public
+// router.post('/login', authController.loginUser);
 
 module.exports = router;
