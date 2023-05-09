@@ -33,6 +33,7 @@ async function createProduct(req, res) {
 			price,
 			image,
 			countInStock,
+			user: req.user.id
 		});
 		const newProduct = await product.save();
 		res.status(201).json(newProduct);

@@ -15,6 +15,7 @@ exports.getAllUsers = async (req, res) => {
     }
 };
 
+// Get user by ID
 exports.getUserById = async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
@@ -27,7 +28,8 @@ exports.getUserById = async (req, res) => {
         res.status(500).send('Server error');
     }
 };
-  
+ 
+// Create or register user
 exports.createUser = async (req, res) => {
     try {
         const { name, email, password } = req.body;
@@ -47,7 +49,8 @@ exports.createUser = async (req, res) => {
         res.status(500).send('Server error');
     }
 };
-  
+
+// Update user by ID
 exports.updateUserById = async (req, res) => {
     try {
         const { name, email, password } = req.body;
@@ -73,7 +76,8 @@ exports.updateUserById = async (req, res) => {
         res.status(500).send('Server error');
     }
 };
-  
+
+// Delete user by ID
 exports.deleteUserById = async (req, res) => {
     try {
         let user = await User.findById(req.params.id);

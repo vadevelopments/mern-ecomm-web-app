@@ -14,8 +14,8 @@ const PORT = process.env.PORT;
 app.use(cors());
 app.use(express.json());
 
-app.use('/api/products', productRoutes); // fetch all products
-app.use('/api/users', userRoutes);  // fetch all users
+app.use('/api/products', productRoutes); // for products
+app.use('/api/users', userRoutes);  // for users
 app.use('/api/auth', authRoutes); // for auth
 
 app.get('/', (req, res) => {
