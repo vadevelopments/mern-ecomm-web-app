@@ -5,7 +5,6 @@ const User = require('../models/User');
 module.exports = async (req, res, next) => {
     // Get token from header
     const token = req.header('x-auth-token');
-    console.log(token);
   
     // Check if token is missing
     if (!token) {
@@ -14,7 +13,6 @@ module.exports = async (req, res, next) => {
 
     // Check if token has been cleared
     const blacklistedToken = await Blacklist.findOne({ token });
-    console.log(blacklistedToken);
     if (blacklistedToken) {
         return res.status(401).json({ msg: 'Authorization denied: token has been cleared' });
     }
@@ -34,8 +32,8 @@ module.exports = async (req, res, next) => {
     
         // Continue with the next middleware or route handler
         next();
-        } catch (err) {
-            console.error(err.message);
-            res.status(401).json({ error: 'Authorization denied: invalid token' });
-        }
+    } catch (err) {
+        console.error(err.message);
+        res.status(401).json({ error: 'Authorization denied: invalid token' });
+    }
 };  
