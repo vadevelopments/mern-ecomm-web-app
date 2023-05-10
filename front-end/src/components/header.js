@@ -1,29 +1,45 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
-function header() {
+function Header({ toggleMode, isLoggedIn, handleLogout }) {
+    
+    const navigate = useNavigate();
+
+    const handleLogoutClick = async (event) => {
+        event.preventDefault();
+        try {
+            // Update the isLoggedIn state
+            handleLogout();
+
+            // Redirect to the home
+            navigate('/');
+    
+        } catch (error) {
+            console.log("Logout Failed");
+            console.error(error);
+        }
+    };
+      
+    
     return (
-        <header>
-            <div className='logo'>
-                <Link to='/'> To Home </Link>
+        <nav>
+            <div className="logo">
+                <a href="/">Home</a>
             </div>
             <ul>
                 <li>
-                    <Link to='/about'>About</Link>
+                    <a href="/about">About</a>
                 </li>
                 <li>
-                    <ul>
-                        <li>
-                            <Link to='/auth'>Login</Link>
-                        </li>
-                        <li>
-                            <Link to='/auth'>Register</Link>
-                        </li>
-                    </ul>
+                    {isLoggedIn ? (
+                        <a href="/" onClick={handleLogoutClick}>Logout</a>
+                    ) : (
+                        <a href="/auth">{toggleMode === "login" ? "Signup" : "Login"}</a>
+                    )}
                 </li>
             </ul>
-        </header>
-    )
+        </nav>
+    );
 }
 
-export default header
+export default Header;

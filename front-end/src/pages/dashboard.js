@@ -1,11 +1,11 @@
 import React from 'react'
 
-function register() {
+function dashboard() {
     return (
         <div>
-            register
+            dashboard
         </div>
     )
 }
 
-export default register
+export default dashboard
