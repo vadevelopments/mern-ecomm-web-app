@@ -46,7 +46,6 @@ exports.loginUser = async (req, res) => {
 exports.logoutUser = async (req, res) => {
     try {
         await User.findByIdAndUpdate(req.user.id, { loggedOut: true }, { new: true });
-        // const updatedUser = await User.findByIdAndUpdate(req.user.id, { loggedOut: true }, { new: true });
         const token = req.cookies.token;
         const blacklistToken = new Blacklist({ token, user: req.user.id });
         await blacklistToken.save();
