@@ -28,15 +28,15 @@ router.put('/:id', userController.updateUserById);
 // @access  Public
 router.delete('/:id', userController.deleteUserById);
 
-// @route   POST api/resetpassword
+// @route   POST api/users/resetpassword
 // @desc    Reset password
 // @access  Public
-router.post('/resetpassword', authMiddleware, userController.resetPassword);
+router.post('/resetpassword', userController.resetPassword);
 
 // @route   POST api/users/reset-password
 // @desc    Send reset password email
 // @access  Public
-router.post('/reset-token', authMiddleware, userController.sendResetPasswordEmail);
+router.post('/reset-token', userController.sendResetPasswordEmail);
 
 // // @route   POST api/login
 // // @desc    Login user

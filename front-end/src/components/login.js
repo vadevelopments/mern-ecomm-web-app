@@ -38,7 +38,6 @@ export function Login({ toggleMode, handleLogin }) {
             .then(token => {
                 // Set the token to local storage
                 localStorage.setItem('token', JSON.stringify(token));
-                console.log("localStorage('token'):", localStorage.getItem('token'));
                 handleLogin();
                 // Redirect to the dashboard
                 navigate('/dashboard');
