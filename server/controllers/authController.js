@@ -9,6 +9,19 @@ exports.loginUser = async (req, res) => {
     try {
         // Check if email exist
         const { email, password } = req.body;
+
+        const validEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email);
+        if (!validEmail) {
+            return res.status(401).json({ msg: 'Invalid email format' });
+        }
+
+        // Check if password is valid
+        const validPassword = /^[\w@!$%*#?&]{8,}$/.test(password);
+        if (!validPassword) {
+            return res.status(401).json({ msg: 'Password must contain at least 8 characters, including only letters, numbers, and the special character "@"' });
+        }
+
+        // Check if user exist.
         const user = await User.findOne({ email });
         if (!user) {
             return res.status(401).json({ msg: 'not user: Invalid email or password' });

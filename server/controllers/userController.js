@@ -34,10 +34,23 @@ exports.getUserById = async (req, res) => {
 exports.createUser = async (req, res) => {
     try {
         const { name, email, password } = req.body;
+
+        // Validate the email address
+        if (!/^\S+@\S+\.\S+$/.test(email)) {
+            return res.status(400).json({ message: 'Invalid email address' });
+        }
+    
+        // Validate the password
+        if (password.length < 8) {
+            return res.status(400).json({ message: 'Password must be at least 8 characters long' });
+        }
+    
+        // Check if the user already exists
         let user = await User.findOne({ email });
         if (user) {
-            return res.status(400).json({ msg: 'User already exists' });
+            return res.status(400).json({ message: 'User already exists' });
         }
+        
         user = new User({
             name,
             email,
