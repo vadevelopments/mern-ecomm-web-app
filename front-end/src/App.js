@@ -11,6 +11,7 @@ import Home from './pages/home';
 import { Auth } from './auth/auth';
 import Header from './components/header';
 import Dashboard from './pages/dashboard';
+import CreateProduct from './pages/createProduct';
 
 // function PrivateRoute({ component: Component, isLoggedIn, ...rest }) {
 // 	return (
@@ -86,7 +87,7 @@ function App() {
 							<Route path="/about" element={<About />} isLoggedIn={isLoggedIn} />
 							{/* <Route path="/dashboard" element={<Dashboard />} /> */}
 							<Route path="/dashboard" element={isLoggedIn ? <Dashboard /> : <Navigate to="/auth" />} />
-							{/* <PrivateRoute path="/dashboard" element={<Dashboard />} isLoggedIn={isLoggedIn} /> */}
+							<Route path="/create-product" element={isLoggedIn ? <CreateProduct /> : <Navigate to="/auth" />} />
 						</Routes>
 					</div>
 					<Footer />

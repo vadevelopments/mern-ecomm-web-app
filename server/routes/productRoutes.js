@@ -6,7 +6,7 @@ const authMiddleware = require('../middleware/authMiddleware');
 // GET all products
 router.get('/', productController.getAllProducts);
 
-// @route   GET api/products/products
+// @route   GET api/products/userProducts
 // @desc    GET all user's products
 // @access  Public
 router.get('/userProducts', authMiddleware, productController.getUserProducts);
@@ -14,7 +14,9 @@ router.get('/userProducts', authMiddleware, productController.getUserProducts);
 // GET a single product by ID
 router.get('/:id', productController.getProductById);
 
-// CREATE a new products
+// @route   POST api/products
+// @desc    Create user's products
+// @access  Public
 router.post('/', authMiddleware, productController.createProduct);
 
 // UPDATE a products by ID
