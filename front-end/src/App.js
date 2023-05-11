@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+// import  { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 import './App.css';
@@ -10,6 +11,26 @@ import Home from './pages/home';
 import { Auth } from './auth/auth';
 import Header from './components/header';
 import Dashboard from './pages/dashboard';
+
+// function PrivateRoute({ component: Component, isLoggedIn, ...rest }) {
+// 	return (
+// 		<Route
+// 			{...rest}
+// 			render={(props) =>
+// 			isLoggedIn ? (
+// 				<Component {...props} />
+// 			) : (
+// 				<Redirect
+// 					to={{
+// 						pathname: '/auth',
+// 						state: { from: props.location },
+// 					}}
+// 				/>
+// 			)
+// 			}
+// 		/>
+// 	);
+// }
 
 function App() {
 	const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
@@ -50,7 +71,8 @@ function App() {
 			console.log("Logout Failed: App.js");
 			console.error(error);
 		}
-	};	  
+	};	 
+	
 
 	return (
 		<div className="App">
@@ -61,8 +83,10 @@ function App() {
 						<Routes>
 							<Route exact path="/" element={<Home />} />
 							<Route path="/auth" element={<Auth handleLogin={handleLogin} />} />
-							<Route path="/about" element={<About />} />
-							<Route path="/dashboard" element={<Dashboard />} />
+							<Route path="/about" element={<About />} isLoggedIn={isLoggedIn} />
+							{/* <Route path="/dashboard" element={<Dashboard />} /> */}
+							<Route path="/dashboard" element={isLoggedIn ? <Dashboard /> : <Navigate to="/auth" />} />
+							{/* <PrivateRoute path="/dashboard" element={<Dashboard />} isLoggedIn={isLoggedIn} /> */}
 						</Routes>
 					</div>
 					<Footer />

@@ -44,11 +44,11 @@ exports.createUser = async (req, res) => {
             password,
         });
         await user.save();
-        console.log("Registered successfully.")
-        res.json(user);
+        console.log("Registered successfully.");
+        res.json({message : "Registered successfully.", user});
     } catch (err) {
         console.error(err.message);
-        res.status(500).send('Server error');
+        res.status(500).send('Registration failed: ' + err.message);
     }
 };
 

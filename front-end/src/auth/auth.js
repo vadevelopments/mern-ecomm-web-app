@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
+
 import { Login } from '../components/login'
 import { Signup } from '../components/signup'
 
-export function Auth({ handleLogin }) {
+export function Auth({ handleLogin, isLoggedIn }) {
+
     const [mode, setMode] = useState('login')
 
     const toggleMode = () => {

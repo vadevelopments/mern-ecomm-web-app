@@ -33,37 +33,16 @@ exports.loginUser = async (req, res) => {
             if (err) throw err;
             console.log("Successfully login.");
             res.cookie('token', token, { httpOnly: true, maxAge: 3600000 }); 
-            console.log(`Token: ${token}`);
+            // console.log(`Token: ${token}`);
             await User.findByIdAndUpdate(user.id, { loggedOut: false });    // set loggedOut flag to false
             res.json({ token, user: payload.user });
         });
     } catch (err) {
-        console.error(err.message);
+        // console.error(err.message);
         res.status(500).send('Server error');
     }
 };
 
-// //logout user
-// exports.logoutUser = async (req, res) => {
-//     console.log(req.headers);
-//     try {
-//         await User.findByIdAndUpdate(req.user.id, { loggedOut: true }, { new: true });
-//         const token = req.cookies.token;
-//         console.log("At b-end: logout, try");
-//         console.log(token);
-//         const blacklistToken = new Blacklist({ token, user: req.user.id });
-//         await blacklistToken.save();
-//         res.cookie('token', '', { httpOnly: true, maxAge: 0, path: '/' }); // Clear the token cookie
-//         console.log('User logged out successfully');
-//         res.json({ msg: 'User logged out successfully' });
-//     } catch (err) {
-//         const token = req.cookies.token;
-//         console.log("At b-end: logout, catch");
-//         console.log(token);
-//         console.error(err.message);
-//         res.status(500).send('Server error');
-//     }
-// };
 exports.logoutUser = async (req, res) => {
     try {
         // Update the user's loggedOut property in the User model
@@ -74,14 +53,16 @@ exports.logoutUser = async (req, res) => {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         const userId = decoded.user.id;
 
-        console.log(`token: ${token}`);
-        console.log(`userID: ${userId}`);
+        // console.log(`token: ${token}`);
+        // console.log(`userID: ${userId}`);
 
         const blacklistToken = new Blacklist({ token, user: userId });
-        // const blacklistToken = new Blacklist({ token, user: req.user.id });
-        if(blacklistToken){
-            console.log("blacklistToken is OK");
-        }
+
+        // // const blacklistToken = new Blacklist({ token, user: req.user.id });
+        // if(blacklistToken){
+        //     console.log("blacklistToken is OK");
+        // }
+
         await blacklistToken.save();
     
         // Clear the token cookie
@@ -92,7 +73,7 @@ exports.logoutUser = async (req, res) => {
         res.json({ msg: "User logged out successfully" });
 
     } catch (err) {
-        console.error(err.message);
+        // console.error(err.message);
         res.status(500).send("Server error");
     }
 };

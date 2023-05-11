@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 
 function Header({ toggleMode, isLoggedIn, handleLogout }) {
     
@@ -12,7 +12,7 @@ function Header({ toggleMode, isLoggedIn, handleLogout }) {
             handleLogout();
 
             // Redirect to the home
-            navigate('/');
+            navigate('/auth');
     
         } catch (error) {
             console.log("Logout Failed");
@@ -24,17 +24,17 @@ function Header({ toggleMode, isLoggedIn, handleLogout }) {
     return (
         <nav>
             <div className="logo">
-                <a href="/">Home</a>
+                <Link to="/">Home</Link>
             </div>
             <ul>
                 <li>
-                    <a href="/about">About</a>
+                    <Link to="/about">About</Link>
                 </li>
                 <li>
                     {isLoggedIn ? (
-                        <a href="/" onClick={handleLogoutClick}>Logout</a>
+                        <Link to="/" onClick={handleLogoutClick}>Logout</Link>
                     ) : (
-                        <a href="/auth">{toggleMode === "login" ? "Signup" : "Login"}</a>
+                        <Link to="/auth">{toggleMode === "login" ? "Signup" : "Login"}</Link>
                     )}
                 </li>
             </ul>
