@@ -3,10 +3,8 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import ProductCard from '../components/productCard';
-import CreateProduct from './createProduct';
 
 function Dashboard() {
-
     const [userProducts, setUserProducts] = useState([]);
     const token = JSON.parse(localStorage.getItem("token"));
 
@@ -20,33 +18,39 @@ function Dashboard() {
         })
         .then((res) => {
             console.log('dashboard try');
-            //   console.log(res.data);
             setUserProducts(res.data);
         })
         .catch((err) => {
             console.log('dashboard catch');
             console.log(err);
         });
-    }, [token.token]);
+    }, []);
 
-  return (
+    return (
         <div>
-            <div>
+            <div className='sidebar'>
                 <Link to="/create-product">CreateProduct</Link>
             </div>
-            <div>
+                <div className='userProdcuts'>
                 <h1>My Products</h1>
                 {userProducts.length > 0 ? (
                     userProducts.map((product) => (
-                    <ProductCard
-                        key={product._id}
-                        name={product.name}
-                        description={product.description}
-                        price={product.price}
-                        image={product.image}
-                        category={product.category}
-                        countInStock={product.countInStock}
-                    />
+                        <Link to={{
+                                pathname:`/view-product/${product._id}`
+                            }} 
+                            key={product._id}
+                            onClick={() => localStorage.setItem("product", JSON.stringify(product))}
+                        >
+                            <p>productId: {product._id}</p>
+                            <ProductCard
+                                name={product.name}
+                                description={product.description}
+                                price={product.price}
+                                image={product.image}
+                                category={product.category}
+                                countInStock={product.countInStock}
+                            />
+                        </Link>
                     ))
                 ) : (
                     <p>Loading...</p>
