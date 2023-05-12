@@ -13,26 +13,7 @@ import Header from './components/header';
 import Dashboard from './pages/dashboard';
 import CreateProduct from './pages/createProduct';
 import ViewProduct from './pages/viewProduct';
-
-// function PrivateRoute({ component: Component, isLoggedIn, ...rest }) {
-// 	return (
-// 		<Route
-// 			{...rest}
-// 			render={(props) =>
-// 			isLoggedIn ? (
-// 				<Component {...props} />
-// 			) : (
-// 				<Redirect
-// 					to={{
-// 						pathname: '/auth',
-// 						state: { from: props.location },
-// 					}}
-// 				/>
-// 			)
-// 			}
-// 		/>
-// 	);
-// }
+import UpdateProduct from './pages/updateProduct';
 
 function App() {
 	const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
@@ -44,6 +25,10 @@ function App() {
 
 	const handleLogin = () => {
 		setIsLoggedIn(true);
+	};
+
+	const sessionExpired = () => {
+		setIsLoggedIn(false);
 	};
 
 	const handleLogout = async () => {
@@ -83,12 +68,13 @@ function App() {
 					<Header toggleMode={toggleMode} isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
 					<div className="content-container">
 						<Routes>
-							<Route exact path="/" element={<Home />} />
+							<Route exact path="/" element={<Home handleLogin={handleLogin} />} />
 							<Route path="/auth" element={<Auth handleLogin={handleLogin} />} />
-							<Route path="/about" element={<About />} isLoggedIn={isLoggedIn} />
-							<Route path="/dashboard" element={isLoggedIn ? <Dashboard /> : <Navigate to="/auth" />} />
-							<Route path="/create-product" element={isLoggedIn ? <CreateProduct /> : <Navigate to="/auth" />} />
-							<Route path="/view-product/:productId" element={isLoggedIn ? <ViewProduct /> : <Navigate to="/auth" />} />
+							<Route path="/about" element={<About handleLogin={handleLogin} />} isLoggedIn={isLoggedIn} />
+							<Route path="/dashboard" element={isLoggedIn ? <Dashboard sessionExpired={sessionExpired} /> : <Navigate to="/auth" />} />
+							<Route path="/create-product" element={isLoggedIn ? <CreateProduct sessionExpired={sessionExpired} /> : <Navigate to="/auth" />} />
+							<Route path="/view-product/:productId" element={isLoggedIn ? <ViewProduct handleLogin={handleLogin} /> : <Navigate to="/auth" />} />
+							<Route path="/update-product/:productId" element={isLoggedIn ? <UpdateProduct handleLogin={handleLogin} /> : <Navigate to="/auth" />} />
 						</Routes>
 					</div>
 					<Footer />

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios'
 
-function CreateProduct() {
+function CreateProduct({ sessionExpired }) {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
@@ -9,7 +9,7 @@ function CreateProduct() {
     const [category, setCategory] = useState('');
     const [countInStock, setCountInStock] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    const [message, setMessage] = useState('');
+    // const [message, setMessage] = useState('');
 
     const API_BASE_URL = 'http://localhost:5000/api';
     const token = JSON.parse(localStorage.getItem("token"));
@@ -27,7 +27,8 @@ function CreateProduct() {
             })
             .then((res) => {
                 console.log('Product created successfully!');
-                setMessage(res.data.message);
+                window.alert(res.data.message);
+                // setMessage(res.data.message);
                 // Clear form fields
                 setName('');
                 setDescription('');
@@ -43,14 +44,18 @@ function CreateProduct() {
                 }
                 // Clear success message
                 console.log('Error creating product:', error);
-                setMessage('');
+
+                if(error.response.status === 401){
+                    sessionExpired();
+                    window.alert(`Session expired. Please log in again.`);
+                }
             });
     };
   
     return (
         <div>
             <h2>Create Product</h2>
-            {message && <p>{message}</p>} {/* Show success message if it exists */}
+            {/* {message && <p>{message}</p>} Show success message if it exists */}
             {errorMessage && <p>{errorMessage}</p>} {/* Show error message if it exists */}
             <form onSubmit={handleSubmit}>
                 <div>

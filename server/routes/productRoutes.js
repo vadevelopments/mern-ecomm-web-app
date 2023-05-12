@@ -19,7 +19,10 @@ router.get('/:id', productController.getProductById);
 // @access  Public
 router.post('/', authMiddleware, productController.createProduct);
 
-// UPDATE a products by ID
+
+// @route   PUT api/products
+// @desc    Update user's product by ID
+// @access  Public
 router.put('/:id', productController.updateProductById);
 
 // DELETE a products by ID

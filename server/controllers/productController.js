@@ -58,11 +58,11 @@ async function updateProductById(req, res) {
 			res.status(404).json({ error: 'Product not found' });
 		} else {
 			console.log('Product updated successfully.');
-			res.json(product);
+			res.status(201).json({ message: "Product updated successfully." , product });
 		}
 	} catch (err) {
 		console.error(err);
-		res.status(500).json({ error: 'Server error' });
+		res.status(500).json({ error: 'Server error',  errormsg: "Product update failed." });
 	}
 }
 
@@ -70,13 +70,14 @@ async function deleteProductById(req, res) {
 	try {
 		const product = await Product.findByIdAndDelete(req.params.id).exec();
 		if (!product) {
-			res.status(404).json({ error: 'Product not found' });
+			res.status(404).json({ message: 'Product not found' });
 		} else {
-			res.json({ message: 'Product deleted successfully' });
+			console.log("Product deleted successfully")
+			res.status(200).json({ message: 'Product deleted successfully' });
 		}
 	} catch (err) {
 		console.error(err);
-		res.status(500).json({ error: 'Server error' });
+		res.status(500).json({ message: 'Server error' });
 	}
 }
 

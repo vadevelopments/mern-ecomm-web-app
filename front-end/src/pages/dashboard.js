@@ -4,7 +4,7 @@ import axios from 'axios';
 
 import ProductCard from '../components/productCard';
 
-function Dashboard() {
+function Dashboard({ sessionExpired }) {
     const [userProducts, setUserProducts] = useState([]);
     const token = JSON.parse(localStorage.getItem("token"));
 
@@ -22,6 +22,10 @@ function Dashboard() {
         })
         .catch((err) => {
             console.log('dashboard catch');
+            if(err.response.status === 401){
+                sessionExpired();
+                window.alert(`Session expired. Please log in again.`);
+            }
             console.log(err);
         });
     }, []);
@@ -41,7 +45,6 @@ function Dashboard() {
                             key={product._id}
                             onClick={() => localStorage.setItem("product", JSON.stringify(product))}
                         >
-                            <p>productId: {product._id}</p>
                             <ProductCard
                                 name={product.name}
                                 description={product.description}
