@@ -28,7 +28,7 @@ function Dashboard({ sessionExpired }) {
             }
             console.log(err);
         });
-    }, []);
+    }, [token.token]);
 
     return (
         <div>

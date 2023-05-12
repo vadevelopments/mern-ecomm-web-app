@@ -1,6 +1,8 @@
 import React from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 
+import '../styles/headers.css'
+
 function Header({ toggleMode, isLoggedIn, handleLogout }) {
     
     const navigate = useNavigate();
@@ -23,10 +25,10 @@ function Header({ toggleMode, isLoggedIn, handleLogout }) {
     
     return (
         <nav>
-            <div className="logo">
+            <div className="header-logo">
                 <Link to="/">Home</Link>
             </div>
-            <ul>
+            <ul className='header-li'>
                 <li>
                     <Link to="/dashboard">Dashboard</Link>
                 </li>

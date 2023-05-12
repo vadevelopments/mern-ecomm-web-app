@@ -1,0 +1,49 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.foot {
+    text-align: center;
+    background-color: #1d3557;
+}
+
+    .foot-padding {
+        padding:  10px;
+    }
+
+    .foot-inline {
+        display: inline-block;
+    }
+
+    .foot-info {
+        vertical-align: top;
+    }
+
+    .foot-about {
+        width: 400px;
+        text-align: justify;
+        vertical-align: top;
+    }
+
+    .foot-page {
+        vertical-align: top;
+        text-align: left;
+    }
+
+    .foot-page a{
+        text-decoration: none;
+        font-size: large;
+        font-weight: bold;
+        color: #f1faee;
+        margin: 20px 10px 20px 0;
+    }
+
+    .foot-page p{
+        font-size: larger;
+        font-weight: bolder;
+        margin-bottom: 10px;
+    }
+
+
+

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-// import  { Redirect } from 'react-router-dom';
 import axios from 'axios';
 
 import './App.css';
@@ -68,9 +67,9 @@ function App() {
 					<Header toggleMode={toggleMode} isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
 					<div className="content-container">
 						<Routes>
-							<Route exact path="/" element={<Home handleLogin={handleLogin} />} />
+							<Route exact path="/" element={<Home sessionExpired={sessionExpired} />} />
 							<Route path="/auth" element={<Auth handleLogin={handleLogin} />} />
-							<Route path="/about" element={<About handleLogin={handleLogin} />} isLoggedIn={isLoggedIn} />
+							<Route path="/about" element={<About />} isLoggedIn={isLoggedIn} />
 							<Route path="/dashboard" element={isLoggedIn ? <Dashboard sessionExpired={sessionExpired} /> : <Navigate to="/auth" />} />
 							<Route path="/create-product" element={isLoggedIn ? <CreateProduct sessionExpired={sessionExpired} /> : <Navigate to="/auth" />} />
 							<Route path="/view-product/:productId" element={isLoggedIn ? <ViewProduct handleLogin={handleLogin} /> : <Navigate to="/auth" />} />

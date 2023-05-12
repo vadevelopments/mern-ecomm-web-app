@@ -1,6 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react';
 
-function home() {
+function Home({ sessionExpired }) {
+
+    useEffect(() => {
+
+        const token = JSON.parse(localStorage.getItem('token'));
+
+        if (token && token.expiresAt && Date.now() > token.expiresAt) {
+            sessionExpired();
+        }
+    }, [sessionExpired]);
+
     return (
         <div className='home'>
             home
@@ -8,4 +18,4 @@ function home() {
     )
 }
 
-export default home
+export default Home

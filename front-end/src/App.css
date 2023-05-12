@@ -3,39 +3,6 @@
     margin: 0;
 }
 
-body {
-    text-align: center;
-}
-
-li {
-    padding: 0 10px;
-    list-style: none;
-    display: inline;
-}
-
-ul {
-    display: inline;
-    float: right;
-    /* padding: 10px; */
-}
-
-.logo {
-    display: inline;
-    float: left;
-}
-
-nav {
-    padding: 20px 10px;
-    /* margin-bottom: 30px; */
-    border-bottom: 1px solid black;
-    background-color: bisque;
-}
-
-.home {
-    min-height: 600px;
-    background-color: rgb(179, 211, 240);
-}
-
 .App {
     display: flex;
     flex-direction: column;
@@ -59,6 +26,7 @@ footer {
     background-color: rgb(43, 9, 5);
 }
 
+/* 
 .product-card {
     max-height: 300px;
     overflow: hidden;
@@ -93,9 +61,6 @@ footer {
         color: aliceblue;
     }
 
-.userProdcutsBorder {
-
-}
 .userProdcuts {
     display: inline-block;
     text-align: left;
@@ -109,4 +74,4 @@ footer {
 
     .userProdcuts img{
         max-width: 100%;
-    }
+    } */
