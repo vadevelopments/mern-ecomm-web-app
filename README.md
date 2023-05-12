@@ -1,4 +1,4 @@
-# MERN Ecommerce Web App
+# MERN E-commerce Web App
 
 See development branch
 
