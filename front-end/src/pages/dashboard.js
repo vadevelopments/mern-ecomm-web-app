@@ -4,8 +4,11 @@ import axios from 'axios';
 
 import ProductCard from '../components/productCard';
 
+import '../styles/dashboard.css'
+
 function Dashboard({ sessionExpired }) {
     const [userProducts, setUserProducts] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
     const token = JSON.parse(localStorage.getItem("token"));
 
     useEffect(() => {
@@ -19,6 +22,7 @@ function Dashboard({ sessionExpired }) {
         .then((res) => {
             console.log('dashboard try');
             setUserProducts(res.data);
+            setIsLoading(false);
         })
         .catch((err) => {
             console.log('dashboard catch');
@@ -27,36 +31,40 @@ function Dashboard({ sessionExpired }) {
                 window.alert(`Session expired. Please log in again.`);
             }
             console.log(err);
+            setIsLoading(false);
         });
     }, [token.token]);
 
     return (
-        <div>
-            <div className='sidebar'>
-                <Link to="/create-product">CreateProduct</Link>
-            </div>
-                <div className='userProdcuts'>
+        <div className='dashboard'>
+            <div className='dashboard-productCard'>
                 <h1>My Products</h1>
-                {userProducts.length > 0 ? (
-                    userProducts.map((product) => (
-                        <Link to={{
-                                pathname:`/view-product/${product._id}`
-                            }} 
-                            key={product._id}
-                            onClick={() => localStorage.setItem("product", JSON.stringify(product))}
-                        >
-                            <ProductCard
-                                name={product.name}
-                                description={product.description}
-                                price={product.price}
-                                image={product.image}
-                                category={product.category}
-                                countInStock={product.countInStock}
-                            />
-                        </Link>
-                    ))
+                {isLoading ? (
+                <p>Loading...</p>
                 ) : (
-                    <p>No product</p>
+                <React.Fragment>
+                    <Link className='dashboard-create' to="/create-product" > Create Product </Link>
+                    {userProducts.length > 0 ? (
+                        userProducts.map((product) => (
+                            <Link 
+                                to={{ pathname: `/view-product/${product._id}`}}
+                                key={product._id}
+                                onClick={() => localStorage.setItem("product", JSON.stringify(product))}
+                                >
+                                <ProductCard
+                                    name={product.name}
+                                    description={product.description}
+                                    price={product.price}
+                                    image={product.image}
+                                    category={product.category}
+                                    countInStock={product.countInStock}
+                                />
+                            </Link>
+                        ))
+                    ) : (
+                        <p>No product</p>
+                    )}
+                </React.Fragment>
                 )}
             </div>
         </div>
