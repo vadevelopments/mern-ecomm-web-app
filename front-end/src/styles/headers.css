@@ -1,7 +1,7 @@
 nav {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
     padding: 10px 30px;
     background-color: #1d3557;
     font-size: larger;
@@ -28,13 +28,12 @@ nav {
 
     .header-li {
         list-style: none;
-        display: flex;
-        justify-content: flex-end;
         align-items: center;
     }
 
         .header-li li {
-            padding: 0 30px;
+            display: inline-block;
+            margin-left: 20px;
         }
 
         .header-li a {

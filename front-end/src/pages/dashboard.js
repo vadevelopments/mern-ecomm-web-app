@@ -39,33 +39,35 @@ function Dashboard({ sessionExpired }) {
         <div className='dashboard'>
             <div className='dashboard-productCard'>
                 <h1>My Products</h1>
-                {isLoading ? (
-                <p>Loading...</p>
-                ) : (
-                <React.Fragment>
-                    <Link className='dashboard-create' to="/create-product" > Create Product </Link>
-                    {userProducts.length > 0 ? (
-                        userProducts.map((product) => (
-                            <Link 
-                                to={{ pathname: `/view-product/${product._id}`}}
-                                key={product._id}
-                                onClick={() => localStorage.setItem("product", JSON.stringify(product))}
-                                >
-                                <ProductCard
-                                    name={product.name}
-                                    description={product.description}
-                                    price={product.price}
-                                    image={product.image}
-                                    category={product.category}
-                                    countInStock={product.countInStock}
-                                />
-                            </Link>
-                        ))
+                <div className='dashboard-center'>
+                    {isLoading ? (
+                    <p>Loading...</p>
                     ) : (
-                        <p>No product</p>
+                    <React.Fragment>
+                        <Link className='dashboard-create' to="/create-product" > Create Product </Link>
+                        {userProducts.length > 0 ? (
+                            userProducts.map((product) => (
+                                <Link 
+                                    to={{ pathname: `/view-product/${product._id}`}}
+                                    key={product._id}
+                                    onClick={() => localStorage.setItem("product", JSON.stringify(product))}
+                                    >
+                                    <ProductCard
+                                        name={product.name}
+                                        description={product.description}
+                                        price={product.price}
+                                        image={product.image}
+                                        category={product.category}
+                                        countInStock={product.countInStock}
+                                    />
+                                </Link>
+                            ))
+                        ) : (
+                            <p>No product</p>
+                        )}
+                    </React.Fragment>
                     )}
-                </React.Fragment>
-                )}
+                </div>
             </div>
         </div>
     );
