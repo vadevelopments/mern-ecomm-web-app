@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 
+import '../styles/signup.css'
+
 const API_BASE_URL = 'http://localhost:5000/api';
 
 export function validateEmail(email) {
@@ -17,7 +19,6 @@ export function Signup({ toggleMode }) {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    const [message, setMessage] = useState('');
 
     const handleEmailChange = (event) => {
         setEmail(event.target.value)
@@ -52,50 +53,45 @@ export function Signup({ toggleMode }) {
         // handle register submission
         axios.post(`${API_BASE_URL}/users/register`, { email, password })
             .then((res) => {
-                // Show success message
-                setMessage(res.data.message);
+                // Show success message 
+                window.alert(res.data.message);
                 // Clear input fields
                 setEmail('');
                 setPassword('');
                 setConfirmPassword('');
-                // Clear error message
-                setErrorMessage('');
             })
             .catch(error => {
-                if (error.response) {
-                    setErrorMessage('Registration failed');
+                if (error) {
+                    window.alert(errorMessage);
                 } else {
-                    setErrorMessage('Network error');
-                }
-                // Clear success message
-                setMessage('');
+                    window.alert('Registration failed');
+                }   
             });
     };
 
     return (
         <div className='signup'>
             <h2>Sign up</h2>
-            {message && <p>{message}</p>} {/* Show success message if it exists */}
-            {errorMessage && <p>{errorMessage}</p>} {/* Show error message if it exists */}
+            {errorMessage && <p className='signup-err'>{errorMessage}</p>}
             <form onSubmit={handleSubmit}>
                 <label>
                     Email:
                     <input type='email' value={email} onChange={handleEmailChange} />
                 </label>
-                <br />
                 <label>
                     Password:
                     <input type='password' value={password} onChange={handlePasswordChange} />
                 </label>
-                <br />
                 <label>
-                    Confirm Password:
+                    <div>
+                        <p>Confirm</p>
+                        <p>Password:</p>
+                    </div>
                     <input type='password' value={confirmPassword} onChange={handleConfirmPasswordChange} />
                 </label>
-                <br />
-                <button type='submit'>Signup</button>
+                <button className='signup-submit' type='submit'>Signup</button>
             </form>
-            <button onClick={toggleMode}>Switch to Login</button>
+            <p className='signup-switch' onClick={toggleMode}>Switch to Login</p>
         </div>
     )
 }

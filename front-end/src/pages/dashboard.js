@@ -56,7 +56,7 @@ function Dashboard({ sessionExpired }) {
                         </Link>
                     ))
                 ) : (
-                    <p>Loading...</p>
+                    <p>No product</p>
                 )}
             </div>
         </div>

@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 import { Login } from '../components/login'
 import { Signup } from '../components/signup'
 
+import '../styles/auth.css'
+
 export function Auth({ handleLogin }) {
 
     const [mode, setMode] = useState('login')

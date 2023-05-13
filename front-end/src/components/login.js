@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
-import { Container, Row, Col, Form, Button } from 'react-bootstrap'
+
+import '../styles/login.css'
 
 const API_BASE_URL = 'http://localhost:5000/api';
 
@@ -51,32 +52,23 @@ export function Login({ toggleMode, handleLogin }) {
     };
 
     return (
-        <Container>
-            <Row className="justify-content-center">
-                <Col md={6}>
-                    <div className="login">
-                        <h2>Login</h2>
-                        {errorMessage && <p>{errorMessage}</p>} {/* Show error message if it exists */}
-                        <p>afpaduelan@gmail.com</p>
-                        <p>password</p>
-                        <Form onSubmit={handleSubmit}>
-                            <Form.Group controlId="formBasicEmail">
-                                <Form.Label>Email</Form.Label>
-                                <Form.Control type="email" value={email} onChange={handleEmailChange} />
-                            </Form.Group>
-
-                            <Form.Group controlId="formBasicPassword">
-                                <Form.Label>Password</Form.Label>
-                                <Form.Control type="password" value={password} onChange={handlePasswordChange} />
-                            </Form.Group>
-
-                            <Button variant="primary" type="submit">Login</Button>
-                        </Form>
-
-                        <Button variant="link" onClick={toggleMode}>Switch to Signup</Button>
-                    </div>
-                </Col>
-            </Row>
-        </Container>
-    )
+        <div className="login">
+            <h2>Log in</h2>
+            {errorMessage && <p className='login-err'>{errorMessage}</p>} {/* Show error message if it exists */}
+            <form onSubmit={handleSubmit}>
+                <div>
+                    <label>
+                        <span>Email:</span>
+                        <input type="email" value={email} onChange={handleEmailChange} />
+                    </label>
+                    <label>
+                        <span>Password:</span>
+                        <input type="password" value={password} onChange={handlePasswordChange} />
+                    </label>
+                </div>
+                <button className='login-submit' type="submit">Login</button>
+            </form>
+            <p className='login-switch' onClick={toggleMode}>Switch to Signup</p>
+        </div>
+    );      
 }

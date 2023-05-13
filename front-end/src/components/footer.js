@@ -19,16 +19,25 @@ function footer() {
                 <p>The project aims to build a full-stack e-commerce web application with login, registration, and reset password functionality. The app will allow users to browse and purchase products, manage their user account information, including shipping and billing addresses, and payment methods. The app will also include product filtering and sorting, product reviews and ratings, shopping cart and checkout functionality, customer support, and order tracking.</p>
             </div>
             <div className='foot-inline foot-page'>
-                <div className=' foot-padding'>
+                <div className='foot-padding '>
                     <Link to='/'>Home</Link>
                     <Link to='about'>About</Link>
                     <Link to='/'>Contact Us</Link>
                 </div>
-                <div className=' foot-padding'>
-                    <p>Follow Us</p>
-                    <img className='foot-inline' src={Logo} alt='Logo' width='50px' height='50px' />
-                    <img className='foot-inline' src={Logo} alt='Logo' width='50px' height='50px' />
-                    <img className='foot-inline' src={Logo} alt='Logo' width='50px' height='50px' />
+                <div className=' foot-padding foot-follow'>
+                    <p id='foot-follow'>Follow Us</p>
+                    <div className='foot-inline'>
+                        <a href='/'> <img src={Logo} alt='Logo' /> </a>
+                        <p>Facebook</p>
+                    </div>
+                    <div className='foot-inline'>
+                        <a href='/'> <img src={Logo} alt='Logo' /> </a>
+                        <p>Instagram</p>
+                    </div>
+                    <div className='foot-inline'>
+                        <a href='/'> <img src={Logo} alt='Logo' /> </a>
+                        <p>Twitter</p>
+                    </div>
                 </div>
             </div>
         </footer>

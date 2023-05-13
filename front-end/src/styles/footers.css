@@ -31,19 +31,44 @@
         text-align: left;
     }
 
-    .foot-page a{
-        text-decoration: none;
-        font-size: large;
-        font-weight: bold;
-        color: #f1faee;
-        margin: 20px 10px 20px 0;
-    }
+        .foot-page a{
+            text-decoration: none;
+            font-size: large;
+            font-weight: bold;
+            color: #f1faee;
+            margin: 20px 10px 20px 0;
+        }
 
-    .foot-page p{
-        font-size: larger;
-        font-weight: bolder;
-        margin-bottom: 10px;
-    }
+        .foot-page p{
+            font-size: larger;
+            font-weight: bolder;
+            margin-bottom: 10px;
+        }
+
+        .foot-follow {
+            margin: 0;
+        }
+
+            #foot-follow {
+                font-size: larger;
+                font-weight: bold;
+            }
+
+            .foot-follow img {
+                width: 50px;
+                height: 50px;
+            }
+
+            .foot-follow p {
+                font-size: smaller;
+                font-weight: normal;
+                text-align: center;
+            }
+
+            .foot-follow a {
+                margin: 0 10px;
+                text-decoration: none;
+            }
 
 
 
