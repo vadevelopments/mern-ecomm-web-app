@@ -9,7 +9,7 @@ import '../styles/auth.css'
 
 export function Auth({ handleLogin }) {
 
-    const [mode, setMode] = useState('login')
+    const [mode, setMode] = useState('login');
 
     // const toggleMode = () => {
     //     if (mode === 'login') {
@@ -23,15 +23,13 @@ export function Auth({ handleLogin }) {
 
     const toggleMode = () => {
         if (mode === 'login') {
-            setMode('signup')
+            setMode('login');
         } else if (mode === 'signup') {
-            setMode('login')
-        } else if (mode === 'resetPassword') {
-            setMode('login')
+            setMode('signup');
+        } else if (mode === 'reset'){
+            setMode('login');
         }
     }
-
-
 
     return (
         <div className='auth'>
@@ -39,17 +37,8 @@ export function Auth({ handleLogin }) {
 
             {mode === 'login' ? <Login toggleMode={toggleMode} handleLogin={handleLogin} /> : 
             mode === 'signup' ? <Signup toggleMode={toggleMode} /> :
+            mode === 'resetPassword' ? <ResetPassword toggleMode={toggleMode}/> :
             <ConfirmReset toggleMode={toggleMode} />}
-
-            {/* {mode === 'login' ? (
-                <Login toggleMode={toggleMode} handleLogin={handleLogin} />
-            ) : mode === 'signup' ? (
-                <Signup toggleMode={toggleMode} />
-            ) : mode === 'resetPassword' ? (
-                <ResetPassword toggleMode={toggleMode} />
-            ) : null} */}
-
-
         </div>
     )
 }

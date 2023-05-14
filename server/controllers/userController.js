@@ -115,13 +115,14 @@ exports.sendResetPasswordEmail = async (req, res) => {
         if (!user) {
             return res.status(400).json({ msg: 'User with that email not found' });
         }
-        const resetPassword = new ResetPassword({ user: user.id });
-        await resetPassword.save();
+        const resetPassword = new ResetPassword({ email: user.email });
         const token = jwt.sign(
             { resetPasswordId: resetPassword.id },
             process.env.JWT_RESET_PASSWORD_SECRET,
             { expiresIn: '1h' }
-        );
+        );  
+        resetPassword.token = token; 
+        await resetPassword.save();
         console.log("Token sent.")
         console.log(`Reset Token: ${token}`);
         // TODO: send email with reset password link containing token
@@ -135,15 +136,17 @@ exports.sendResetPasswordEmail = async (req, res) => {
 // Reset password
 exports.resetPassword = async (req, res) => {
     try {
-        const { password } = req.body;
-        const { resetPasswordId } = jwt.verify(req.params.token, process.env.JWT_RESET_PASSWORD_SECRET);
+        const { password, token } = req.body;
+        const { resetPasswordId } = jwt.verify(token, process.env.JWT_RESET_PASSWORD_SECRET);
         const resetPassword = await ResetPassword.findById(resetPasswordId);
         if (!resetPassword) {
             return res.status(400).json({ msg: 'Invalid reset password token' });
         }
-        const user = await User.findById(resetPassword.user);
-        const salt = await bcrypt.genSalt(10);
-        user.password = await bcrypt.hash(password, salt);
+        const user = await User.findOne({ email: resetPassword.email });
+        if (!user) {
+            return res.status(400).json({ msg: 'User with that email not found' });
+        }
+        user.password = password;
         await user.save();
         await resetPassword.deleteOne();
         console.log("Password reset successful");

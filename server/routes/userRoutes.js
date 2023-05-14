@@ -33,7 +33,7 @@ router.delete('/:id', userController.deleteUserById);
 // @access  Public
 router.post('/resetpassword', userController.resetPassword);
 
-// @route   POST api/users/reset-password
+// @route   POST api/users/reset-token
 // @desc    Send reset password email
 // @access  Public
 router.post('/reset-token', userController.sendResetPasswordEmail);
