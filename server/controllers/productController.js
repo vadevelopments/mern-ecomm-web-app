@@ -1,5 +1,5 @@
+const Joi = require('joi');
 const Product = require('../models/product');
-// const User = require('../models/user');
 
 async function getAllProducts(req, res) {
 	try {
@@ -27,16 +27,30 @@ async function getProductById(req, res) {
 
 async function createProduct(req, res) {
 	try {
-		const { name, description, price, image, category, countInStock } = req.body;
+		const schema = Joi.object({
+			name: Joi.string().required(),
+			description: Joi.string().required(),
+			price: Joi.number().required(),
+			image: Joi.string().required(),
+			category: Joi.string().required(),
+			countInStock: Joi.number().required()
+		});
+	
+		const { error, value } = schema.validate(req.body);
+		if (error) {
+			return res.status(400).json({ error: error.details[0].message });
+		}
+	
 		const product = new Product({
-			name,
-			description,
-			price,
-			image,
-			category,
-			countInStock,
+			name: value.name,
+			description: value.description,
+			price: value.price,
+			image: value.image,
+			category: value.category,
+			countInStock: value.countInStock,
 			user: req.user.id
 		});
+	
 		const newProduct = await product.save();
 		console.log('Product created successfully.');
 		res.status(201).json({ message: "Product created successfully." , newProduct });
@@ -48,12 +62,36 @@ async function createProduct(req, res) {
 
 async function updateProductById(req, res) {
 	try {
-		const { name, description, price, image, category, countInStock } = req.body;
+		const schema = Joi.object({
+			name: Joi.string(),
+			description: Joi.string(),
+			price: Joi.number(),
+			image: Joi.string(),
+			category: Joi.string(),
+			countInStock: Joi.number()
+		});
+	
+		const { error, value } = schema.validate(req.body);
+		if (error) {
+			return res.status(400).json({ error: error.details[0].message });
+		}
+	
+		const productData = {
+			updatedAt: Date.now(),
+			...(value.name && { name: value.name }),
+			...(value.description && { description: value.description }),
+			...(value.price && { price: value.price }),
+			...(value.image && { image: value.image }),
+			...(value.category && { category: value.category }),
+			...(value.countInStock && { countInStock: value.countInStock })
+		};
+	
 		const product = await Product.findByIdAndUpdate(
 			req.params.id,
-			{ name, description, price, image, category, countInStock },
+			productData,
 			{ new: true }
 		).exec();
+	
 		if (!product) {
 			res.status(404).json({ error: 'Product not found' });
 		} else {
