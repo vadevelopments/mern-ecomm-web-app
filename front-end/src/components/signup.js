@@ -14,12 +14,16 @@ export function validatePassword(password) {
     return password.length >= 6;
 }
 
-export function Signup({ toggleMode }) {
+export function Signup({ setMode }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const nameInputRef = useRef(null);
+
+    const toLogin = () => {
+        setMode('login');
+    }
 
     useEffect(() => {
         nameInputRef.current.focus();
@@ -96,7 +100,7 @@ export function Signup({ toggleMode }) {
                 </label>
                 <button className='signup-submit' type='submit'>Signup</button>
             </form>
-            <p className='signup-switch' onClick={toggleMode}>Switch to Login</p>
+            <p className='signup-switch' onClick={toLogin}>Switch to Login</p>
         </div>
     )
 }

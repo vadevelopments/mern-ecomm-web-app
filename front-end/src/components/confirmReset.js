@@ -3,7 +3,7 @@ import React, { useRef, useEffect } from 'react'
 
 import '../styles/confirmReset.css'
 
-export function ConfirmReset({ toggleMode }) {
+export function ConfirmReset({ setMode }) {
     
     const nameInputRef = useRef(null);
 
@@ -11,6 +11,13 @@ export function ConfirmReset({ toggleMode }) {
         nameInputRef.current.focus();
     }, []);
 
+    const toLogin = () => {
+        setMode('login');
+    }
+
+    const toSignup = () => {
+        setMode('signup');
+    }
 
     return (
         <div class="confirm-reset-container">
@@ -22,8 +29,8 @@ export function ConfirmReset({ toggleMode }) {
                 <input type="password" id="confirm-password" class="confirm-reset-input" required/>
                 <button type="submit" class="confirm-reset-button">Reset Password</button>
                 <div className='confirm-switch'>
-                    <p onClick={toggleMode}>Log in</p>
-                    <p onClick={toggleMode}>Sign up</p>
+                    <p onClick={toLogin}>Log in</p>
+                    <p onClick={toSignup}>Sign up</p>
                 </div>
             </form>
         </div>

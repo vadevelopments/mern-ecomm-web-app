@@ -18,12 +18,20 @@ export function loginUser(email, password) {
         });
 }
 
-export function Login({ toggleMode, handleLogin }) {
+export function Login({ setMode, handleLogin }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
     const nameInputRef = useRef(null);
+
+    const toForgotPasswowrd = () => {
+        setMode('resetPassword');
+    }
+
+    const toSignup= () => {
+        setMode('signup');
+    }
 
     const handleEmailChange = (event) => {
         setEmail(event.target.value);   
@@ -73,8 +81,8 @@ export function Login({ toggleMode, handleLogin }) {
                 <button className='login-submit' type="submit">Login</button>
             </form>
             <div className='login-switch'>
-                <p onClick={toggleMode}>Forgot Password</p>
-                <p onClick={toggleMode}>Sign up</p>
+                <p onClick={toForgotPasswowrd}>Forgot Password</p>
+                <p onClick={toSignup}>Sign up</p>
             </div>
         </div>
     );      

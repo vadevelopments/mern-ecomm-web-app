@@ -21,24 +21,16 @@ export function Auth({ handleLogin }) {
     //     }
     // }
 
-    const toggleMode = () => {
-        if (mode === 'login') {
-            setMode('login');
-        } else if (mode === 'signup') {
-            setMode('signup');
-        } else if (mode === 'reset'){
-            setMode('login');
-        }
+    const toSetMode = (newValue) => {
+        setMode(newValue);
     }
 
     return (
         <div className='auth'>
-
-
-            {mode === 'login' ? <Login toggleMode={toggleMode} handleLogin={handleLogin} /> : 
-            mode === 'signup' ? <Signup toggleMode={toggleMode} /> :
-            mode === 'resetPassword' ? <ResetPassword toggleMode={toggleMode}/> :
-            <ConfirmReset toggleMode={toggleMode} />}
+            {mode === 'login' ? <Login setMode={toSetMode} handleLogin={handleLogin} /> : 
+            mode === 'signup' ? <Signup setMode={toSetMode} /> :
+            mode === 'resetPassword' ? <ResetPassword setMode={toSetMode} /> :
+            <ConfirmReset setMode={toSetMode} />}
         </div>
     )
 }
