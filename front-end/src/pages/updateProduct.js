@@ -51,20 +51,20 @@ function UpdateProduct() {
     };
 
 	return (
-		<div>
-			<h4>Update Product</h4>
-			<div>
-				<form onSubmit={handleSubmit}>
+		<div className='updateProduct'>
+			<h2 >Update Product</h2>
+			<div className='updateProduct-pos'>
+				<img src={image} alt='Product image'/>
+				<form className='createProduct-form' onSubmit={handleSubmit}>
 					<label>
 						Name:
 						<input
-							type="text"
-							id="name"
-							value={name}
+							type="text" value={name}
 							onChange={(event) => setName(event.target.value)}
 						/>
 					</label>
-					<label>Description:
+					<label>
+						Description:
 						<textarea
 							id="description"
 							value={description}
@@ -79,27 +79,24 @@ function UpdateProduct() {
 							onChange={(event) => setPrice(event.target.value)}
 						/>
 					</label>
-					<label htmlFor="image">Image URL:
+					<label>
+						Image URL:
 						<input
-							type="text"
-							id="image"
-							value={image}
+							type="text" value={image}
 							onChange={(event) => setImage(event.target.value)}
 						/>
 					</label>
-					<label htmlFor="category">Category:
+					<label>
+						Category:
 						<input
-							type="text"
-							id="category"
-							value={category}
+							type="text" value={category}
 							onChange={(event) => setCategory(event.target.value)}
 						/>
 					</label>
-					<label htmlFor="countInStock">Count in Stock:
+					<label>
+						Count in Stock:
 						<input
-							type="number"
-							id="countInStock"
-							value={countInStock}
+							type="number" value={countInStock}
 							onChange={(event) => setCountInStock(event.target.value)}
 						/>
 					</label>	
