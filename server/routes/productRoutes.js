@@ -3,12 +3,14 @@ const router = express.Router();
 const productController = require('../controllers/productController');
 const authMiddleware = require('../middleware/authMiddleware');
 
-// GET all products
+// @route   GET api/products/
+// @desc    GET all products
+// @access  Public
 router.get('/', productController.getAllProducts);
 
 // @route   GET api/products/userProducts
 // @desc    GET all user's products
-// @access  Public
+// @access  Private
 router.get('/userProducts', authMiddleware, productController.getUserProducts);
 
 // GET a single product by ID

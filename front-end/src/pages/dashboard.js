@@ -9,36 +9,37 @@ import '../styles/dashboard.css'
 function Dashboard({ sessionExpired }) {
     const [userProducts, setUserProducts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    
     const token = JSON.parse(localStorage.getItem("token"));
 
     useEffect(() => {
-        axios
-        .get('http://localhost:5000/api/products/userProducts',{
-            headers: {
-                "x-auth-token": token.token,
-                "Content-Type": "application/json",
-            },
-        })
-        .then((res) => {
-            console.log('dashboard try');
-            setUserProducts(res.data);
-            setIsLoading(false);
-        })
-        .catch((err) => {
-            console.log('dashboard catch');
-            if(err.response.status === 401){
-                sessionExpired();
-                window.alert(`Session expired. Please log in again.`);
-            }
-            console.log(err);
-            setIsLoading(false);
-        });
+            axios
+            .get('http://localhost:5000/api/products/userProducts',{
+                headers: {
+                    "x-auth-token": token.token,
+                    "Content-Type": "application/json",
+                },
+            })
+            .then((res) => {
+                console.log('dashboard try');
+                setUserProducts(res.data);
+                setIsLoading(false);
+            })
+            .catch((err) => {
+                console.log('dashboard catch');
+                if(err.response.status === 401){
+                    sessionExpired();
+                    window.alert(`Session expired. Please log in again.`);
+                }
+                console.log(err);
+                setIsLoading(false);
+            })
     }, [token.token]);
 
     return (
         <div className='dashboard'>
             <div className='dashboard-productCard'>
-                <h1>My Products</h1>
+                <h1>My Products ({userProducts.length})</h1>
                 <div className='dashboard-center'>
                     {isLoading ? (
                     <p>Loading...</p>

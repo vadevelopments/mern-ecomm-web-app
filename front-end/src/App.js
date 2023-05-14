@@ -67,7 +67,7 @@ function App() {
 					<Header toggleMode={toggleMode} isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
 					<div className="content-container">
 						<Routes>
-							<Route exact path="/" element={<Home sessionExpired={sessionExpired} />} />
+							<Route exact path="/" element={<Home />} />
 							<Route path="/auth" element={<Auth handleLogin={handleLogin} />} />
 							<Route path="/about" element={<About />} isLoggedIn={isLoggedIn} />
 							<Route path="/dashboard" element={isLoggedIn ? <Dashboard sessionExpired={sessionExpired} /> : <Navigate to="/auth" />} />

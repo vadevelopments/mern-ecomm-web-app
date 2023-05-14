@@ -45,7 +45,8 @@ exports.loginUser = async (req, res) => {
         jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '1h' }, async (err, token) => {
             if (err) throw err;
             console.log("Successfully login.");
-            res.cookie('token', token, { httpOnly: true, maxAge: 3600000 }); 
+            res.cookie('token', token, { httpOnly: true, maxAge: 3600000 }); // 60 minutes (1 hour).
+            // res.cookie('token', token, { httpOnly: true, maxAge: 10000 }); // 10 seconds
             // console.log(`Token: ${token}`);
             await User.findByIdAndUpdate(user.id, { loggedOut: false });    // set loggedOut flag to false
             res.json({ token, user: payload.user });

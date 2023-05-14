@@ -10,6 +10,14 @@
     margin: 20px 10px;
 } 
 
+.productCard:hover {
+    filter: brightness(0.5);
+} 
+
+.productCard:active {
+    filter: brightness(1.2);
+} 
+
 .productCard-img img{
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;

@@ -9,17 +9,33 @@ nav {
     height: 30px;
 }
 
-    .header-logo {
-        font-size: x-large;
+.header-logo {
+    font-size: x-large;
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+}
+
+    .header-logo h4 {
+        color: #a8dadc;
+        border-left: 3px solid #a8dadc;
+        margin: 0 30px;
+        padding: 5px 0 5px 15px;
+        /* padding-left: 15px; */
+        font-weight: normal;
+        font-size: 1rem;
+        align-self: center;
     }
     
         .header-logo a{
             text-decoration: none;
             color: #a8dadc;
+            transition: font-size 0.2s ease-in-out;
         }
 
             .header-logo a:hover{
                 font-size: xx-large;
+                transition: font-size 0.2s ease-in-out;
             }
 
             .header-logo a:active{

@@ -1,15 +1,24 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 
 import '../styles/headers.css'
 
 function Header({ toggleMode, isLoggedIn, handleLogout }) {
-    
+
+    const [user, setUser] = useState(null); 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const token = JSON.parse(localStorage.getItem('token'));
+        {token ? setUser(`Hi ${token.user.email}`) : setUser('Hi!')}
+    }, [isLoggedIn]);
+    
 
     const handleLogoutClick = async (event) => {
         event.preventDefault();
         try {
+            setUser('Hi!')
+
             // Update the isLoggedIn state
             handleLogout();
 
@@ -27,6 +36,7 @@ function Header({ toggleMode, isLoggedIn, handleLogout }) {
         <nav>
             <div className="header-logo">
                 <Link to="/">Home</Link>
+                <h4 className='header-separator'>{user}</h4>
             </div>
             <ul className='header-li'>
                 <li>

@@ -52,10 +52,14 @@
     font-weight: bold;
     color: #1d3557;
 }
+
+#viewProduct-price {
+    color: #c91616;
+}
   
 .viewProduct-btn {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
 }
   
 .viewProduct-btn button {

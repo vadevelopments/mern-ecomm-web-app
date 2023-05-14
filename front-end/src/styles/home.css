@@ -3,3 +3,27 @@
     margin: 0;
 }
 
+.home {
+    padding: 20px;
+    background-color: #457b9d;
+}
+
+    .home h1 {
+        margin: 0 10px;
+
+        color: #f1faee;
+        border-bottom: 2px solid #f1faee;
+    }
+
+    .home-flush {
+        min-height: 130px;
+    }
+
+    .home-flush h1 {
+        font-size: medium;
+        font-weight: normal;
+    }
+
+    .home-cards {
+        display: inline-flex;
+    }
