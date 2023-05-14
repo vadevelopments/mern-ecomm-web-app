@@ -50,7 +50,6 @@ function ViewProduct() {
     return (
         <div className='viewProduct'>
             <div className='viewProduct-info'>
-                <img src={product.image} alt={product.name} />
                 <div className='viewProduct-det'>
                     <h1>{product.name}</h1>
                     <p className='viewProduct-price'>Price: <span id='viewProduct-price'>${product.price}</span></p>
@@ -58,6 +57,7 @@ function ViewProduct() {
                     <p className='viewProduct-cat'>Category: {product.category}</p>
                     <p className='viewProduct-caount'>CountInStock: {product.countInStock}</p>
                 </div>
+                <img src={product.image} alt={product.name} className='viewProduct-img' />
             </div>
             <div className='viewProduct-btn'>
                 <button id='viewProduct-update' onClick={handleUpdateClick}>Update</button>
