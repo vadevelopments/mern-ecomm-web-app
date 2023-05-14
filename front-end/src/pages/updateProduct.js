@@ -55,59 +55,54 @@ function UpdateProduct() {
 			<h4>Update Product</h4>
 			<div>
 				<form onSubmit={handleSubmit}>
-					<div>
-						<label htmlFor="name">Name:</label>
+					<label>
+						Name:
 						<input
 							type="text"
 							id="name"
 							value={name}
 							onChange={(event) => setName(event.target.value)}
 						/>
-					</div>
-					<div>
-						<label htmlFor="description">Description:</label>
+					</label>
+					<label>Description:
 						<textarea
 							id="description"
 							value={description}
 							onChange={(event) => setDescription(event.target.value)}
 						/>
-					</div>
-					<div>
-						<label htmlFor="price">Price:</label>
+					</label>	
+					<label>Price:
 						<input
 							type="number"
 							id="price"
 							value={price}
 							onChange={(event) => setPrice(event.target.value)}
 						/>
-					</div>
-					<div>
-						<label htmlFor="image">Image URL:</label>
+					</label>
+					<label htmlFor="image">Image URL:
 						<input
 							type="text"
 							id="image"
 							value={image}
 							onChange={(event) => setImage(event.target.value)}
 						/>
-					</div>
-					<div>
-						<label htmlFor="category">Category:</label>
+					</label>
+					<label htmlFor="category">Category:
 						<input
 							type="text"
 							id="category"
 							value={category}
 							onChange={(event) => setCategory(event.target.value)}
 						/>
-					</div>
-					<div>
-						<label htmlFor="countInStock">Count in Stock:</label>
+					</label>
+					<label htmlFor="countInStock">Count in Stock:
 						<input
 							type="number"
 							id="countInStock"
 							value={countInStock}
 							onChange={(event) => setCountInStock(event.target.value)}
 						/>
-					</div>
+					</label>	
 					<button type="submit">Update Product</button>
 				</form>
 			</div>

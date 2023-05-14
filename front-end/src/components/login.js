@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 
@@ -23,6 +23,7 @@ export function Login({ toggleMode, handleLogin }) {
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const navigate = useNavigate();
+    const nameInputRef = useRef(null);
 
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
@@ -31,6 +32,10 @@ export function Login({ toggleMode, handleLogin }) {
     const handlePasswordChange = (event) => {
         setPassword(event.target.value);
     };
+
+    useEffect(() => {
+        nameInputRef.current.focus();
+    }, []);
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -59,7 +64,8 @@ export function Login({ toggleMode, handleLogin }) {
                 <div>
                     <label>
                         <span>Email:</span>
-                        <input type="email" value={email} onChange={handleEmailChange} />
+                        <input type="email" value={email} onChange={handleEmailChange} ref={nameInputRef} />
+                        
                     </label>
                     <label>
                         <span>Password:</span>

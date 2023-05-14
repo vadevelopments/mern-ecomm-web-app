@@ -6,7 +6,6 @@ import '../styles/viewProduct.css'
 function ViewProduct() {
 
     const navigate = useNavigate();
-    // const [successMessage, setSuccessMessage] = useState('');
 
     const product = JSON.parse(localStorage.getItem("product"));
     const API_BASE_URL = 'http://localhost:5000/api';
@@ -42,7 +41,6 @@ function ViewProduct() {
             .catch(error => {
                 if (error) {
                     window.alert(error.data.message);
-                    // setErrorMessage('Updating product failed');
                 }
                 // Clear success message
                 console.log('Error updating product:', error);
@@ -50,20 +48,22 @@ function ViewProduct() {
     };
 
     return (
-        <>
-            <div className='viewProduct'>
+        <div className='viewProduct'>
+            <div className='viewProduct-info'>
                 <img src={product.image} alt={product.name} />
-                <h1>Name: {product.name}</h1>
-                <p>Description{product.description}</p>
-                <p>Price{product.price}</p>
-                <p>Category{product.category}</p>
-                <p>CountInStock{product.countInStock}</p>
+                <div className='viewProduct-det'>
+                    <h1>{product.name}</h1>
+                    <p className='viewProduct-price'>Price: <span id='viewProduct-price'>${product.price}</span></p>
+                    <p className='viewProduct-desc'>{product.description}</p>
+                    <p className='viewProduct-cat'>Category: {product.category}</p>
+                    <p className='viewProduct-caount'>CountInStock: {product.countInStock}</p>
+                </div>
             </div>
-            <div>
-                <button onClick={handleUpdateClick}>Update</button>
-                <button onClick={handleDeleteClick}>Delete</button>
+            <div className='viewProduct-btn'>
+                <button id='viewProduct-update' onClick={handleUpdateClick}>Update</button>
+                <button id='viewProduct-delete' onClick={handleDeleteClick}>Delete</button>
             </div>
-        </>
+        </div>
     );
 }
 

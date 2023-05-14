@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef  } from 'react';
 import axios from 'axios'
+
+import '../styles/createProduct.css'
 
 function CreateProduct({ sessionExpired }) {
     const [name, setName] = useState('');
@@ -9,10 +11,14 @@ function CreateProduct({ sessionExpired }) {
     const [category, setCategory] = useState('');
     const [countInStock, setCountInStock] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
-    // const [message, setMessage] = useState('');
+    const nameInputRef = useRef(null);
 
     const API_BASE_URL = 'http://localhost:5000/api';
     const token = JSON.parse(localStorage.getItem("token"));
+
+    useEffect(() => {
+        nameInputRef.current.focus();
+    }, []);
   
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -53,66 +59,58 @@ function CreateProduct({ sessionExpired }) {
     };
   
     return (
-        <div>
+        <div className='createProduct'>
             <h2>Create Product</h2>
-            {/* {message && <p>{message}</p>} Show success message if it exists */}
-            {errorMessage && <p>{errorMessage}</p>} {/* Show error message if it exists */}
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="name">Name:</label>
-                    <input
-                        type="text"
-                        id="name"
-                        value={name}
-                        onChange={(event) => setName(event.target.value)}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="description">Description:</label>
-                    <textarea
-                        id="description"
-                        value={description}
-                        onChange={(event) => setDescription(event.target.value)}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="price">Price:</label>
-                    <input
-                        type="number"
-                        id="price"
-                        value={price}
-                        onChange={(event) => setPrice(event.target.value)}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="image">Image URL:</label>
-                    <input
-                        type="text"
-                        id="image"
-                        value={image}
-                        onChange={(event) => setImage(event.target.value)}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="category">Category:</label>
-                    <input
-                        type="text"
-                        id="category"
-                        value={category}
-                        onChange={(event) => setCategory(event.target.value)}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="countInStock">Count in Stock:</label>
-                    <input
-                        type="number"
-                        id="countInStock"
-                        value={countInStock}
-                        onChange={(event) => setCountInStock(event.target.value)}
-                    />
-                </div>
-                <button type="submit">Create Product</button>
-            </form>
+            {errorMessage && <p className='createProduct-err'>{errorMessage}</p>}
+            <div className='createProduct-pos'>
+                <img src={image} alt='Product image'/>
+                <form className='createProduct-form' onSubmit={handleSubmit}>
+                    <label>
+                        Name:
+                        <input 
+                            type="text" value={name}
+                            onChange={(event) => setName(event.target.value)}
+                            ref={nameInputRef}
+                        />
+                    </label>
+                    <label htmlFor="description">
+                        Description:
+                        <textarea
+                            value={description}
+                            onChange={(event) => setDescription(event.target.value)}
+                        />
+                    </label>
+                    <label htmlFor="price">
+                        Price:
+                        <input
+                            type="number" value={price}
+                            onChange={(event) => setPrice(event.target.value)}
+                        />
+                    </label>
+                    <label htmlFor="image">
+                        Image URL:
+                        <input
+                            type="text" value={image}
+                            onChange={(event) => setImage(event.target.value)}
+                        />
+                    </label>
+                    <label htmlFor="category">
+                        Category:
+                        <input
+                            type="text" value={category}
+                            onChange={(event) => setCategory(event.target.value)}
+                        />
+                    </label>
+                    <label htmlFor="countInStock">
+                        Count in Stock:
+                        <input
+                            type="number" value={countInStock}
+                            onChange={(event) => setCountInStock(event.target.value)}
+                        />
+                    </label>
+                    <button type="submit">Create Product</button>
+                </form>
+            </div>
         </div>
     );  
 }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import axios from 'axios'
 
 import '../styles/signup.css'
@@ -19,6 +19,11 @@ export function Signup({ toggleMode }) {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const nameInputRef = useRef(null);
+
+    useEffect(() => {
+        nameInputRef.current.focus();
+    }, []);
 
     const handleEmailChange = (event) => {
         setEmail(event.target.value)
@@ -76,7 +81,7 @@ export function Signup({ toggleMode }) {
             <form onSubmit={handleSubmit}>
                 <label>
                     Email:
-                    <input type='email' value={email} onChange={handleEmailChange} />
+                    <input type='email' value={email} onChange={handleEmailChange} ref={nameInputRef}/>
                 </label>
                 <label>
                     Password:
