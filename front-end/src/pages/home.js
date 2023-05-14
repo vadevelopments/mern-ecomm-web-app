@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 import ProductCard from '../components/productCard'
 import FlushProduct from '../components/flashProduct'
@@ -24,13 +25,18 @@ function Home() {
         <div className='home'>
             <div className='home-flush'>
                 <h1>Flush Deals</h1>
-                <div className='home-cards'>
-                    <FlushProduct/> <FlushProduct/> <FlushProduct/> <FlushProduct/>
+                <div>
+                    <React.Fragment>
+                        <Link> <FlushProduct/> </Link>
+                        <Link> <FlushProduct/> </Link>
+                        <Link> <FlushProduct/> </Link>
+                        <Link> <FlushProduct/> </Link>
+                    </React.Fragment>
                 </div>
             </div>
             <div>
                 <h1>All Products</h1>
-                <div>
+                <div className='home-flush'>
                     {products.map((product) => (
                         <ProductCard
                         key={product._id}

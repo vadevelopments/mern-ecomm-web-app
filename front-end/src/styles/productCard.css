@@ -8,14 +8,18 @@
     display: inline-block;
     overflow: hidden;
     margin: 20px 10px;
+    transition: all 0.2s ease-in-out;
 } 
 
 .productCard:hover {
+    cursor: pointer;
     filter: brightness(0.5);
+    transition: all 0.2s ease-in-out;
 } 
 
 .productCard:active {
     filter: brightness(1.2);
+    transition: all 0.2s ease-in-out;
 } 
 
 .productCard-img img{

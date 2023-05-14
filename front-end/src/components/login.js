@@ -26,7 +26,7 @@ export function Login({ toggleMode, handleLogin }) {
     const nameInputRef = useRef(null);
 
     const handleEmailChange = (event) => {
-        setEmail(event.target.value);
+        setEmail(event.target.value);   
     };
 
     const handlePasswordChange = (event) => {
@@ -61,20 +61,21 @@ export function Login({ toggleMode, handleLogin }) {
             <h2>Log in</h2>
             {errorMessage && <p className='login-err'>{errorMessage}</p>} {/* Show error message if it exists */}
             <form onSubmit={handleSubmit}>
-                <div>
-                    <label>
-                        <span>Email:</span>
-                        <input type="email" value={email} onChange={handleEmailChange} ref={nameInputRef} />
-                        
-                    </label>
-                    <label>
-                        <span>Password:</span>
-                        <input type="password" value={password} onChange={handlePasswordChange} />
-                    </label>
-                </div>
+                <label>
+                    <span>Email:</span>
+                    <input type="email" value={email} onChange={handleEmailChange} ref={nameInputRef} />
+                    
+                </label>
+                <label>
+                    <span>Password:</span>
+                    <input type="password" value={password} onChange={handlePasswordChange} />
+                </label>
                 <button className='login-submit' type="submit">Login</button>
             </form>
-            <p className='login-switch' onClick={toggleMode}>Switch to Signup</p>
+            <div className='login-switch'>
+                <p onClick={toggleMode}>Forgot Password</p>
+                <p onClick={toggleMode}>Sign up</p>
+            </div>
         </div>
     );      
 }

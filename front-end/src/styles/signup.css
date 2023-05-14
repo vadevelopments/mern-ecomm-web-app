@@ -26,13 +26,16 @@
     display: flex;
     flex-direction: row;
     justify-content:space-between;
-    margin: 10px;
+    margin: 10px 0;
     align-items: center;
     text-align: left;
+    font-weight: bold;
+    color: #1d3557;
 }
 
 .signup input {
-    border: 0.5px solid rgb(48, 47, 47);
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    border: none;
     background-color: #f1faee;
     border-radius: 5px;
     padding: 3px 5px;
@@ -42,7 +45,8 @@
 }
 
 .signup-submit {
-    border: 0.5px solid rgb(48, 47, 47);
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    border: none;
     background-color: #457b9d;
     border-radius: 5px;
     padding: 10px 0;
@@ -66,11 +70,13 @@
 .signup-switch {
     color: #1d3557;
     cursor: pointer;
-    margin-top: 50px;
+    margin-top: 20px;
+    transition: all 0.2s ease-in-out;
 }
 
 .signup-switch:hover {
     font-weight: bold;
+    transition: all 0.2s ease-in-out;
 }
 
 .signup-switch:active {

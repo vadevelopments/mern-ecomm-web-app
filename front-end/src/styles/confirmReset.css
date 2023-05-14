@@ -1,0 +1,81 @@
+.confirm-reset-form {
+    width: 350px;
+    padding: 40px;
+    background-color: #a8dadc;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+
+.confirm-reset-form h2 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #1d3557;
+}
+
+.confirm-reset-form label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #1d3557;
+}
+
+.confirm-reset-form input[type="password"],
+.confirm-reset-form button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: none;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+}
+
+.confirm-reset-form input[type="password"] {
+    font-size: 1em;
+    font-weight: bolder;
+}
+
+.confirm-reset-form button[type="submit"] {
+    margin: 10px 0 40px 0;
+    background-color: #457b9d;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.confirm-reset-form button[type="submit"]:hover {
+    background-color: #1d3557;
+    transition: all 0.2s ease-in-out;
+}
+
+.confirm-reset-form button[type="submit"]:active {
+    background-color: #245ba8;
+}
+
+
+.confirm-switch{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.confirm-switch p {
+    cursor: pointer;
+    display: inline-block;
+    transition: all 0.2s ease-in-out;
+    color: #1d3557;
+    margin: 5px;
+}
+
+.confirm-switch p:hover {
+    font-weight: bold;
+    transition: all 0.2s ease-in-out;
+}
+
+.confirm-switch p:active {
+    color: #f1faee;
+}
