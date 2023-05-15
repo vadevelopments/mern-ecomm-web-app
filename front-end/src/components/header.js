@@ -14,22 +14,22 @@ function Header({ toggleMode, isLoggedIn, handleLogout }) {
     }, [isLoggedIn]);
     
 
-    const handleLogoutClick = async (event) => {
-        event.preventDefault();
-        try {
-            setUser('Hi!')
+    // const handleLogoutClick = async (event) => {
+    //     event.preventDefault();
+    //     try {
+    //         setUser('Hi!')
 
-            // Update the isLoggedIn state
-            handleLogout();
+    //         // Update the isLoggedIn state
+    //         handleLogout();
 
-            // Redirect to the home
-            navigate('/auth');
+    //         // Redirect to the home
+    //         navigate('/auth');
     
-        } catch (error) {
-            console.log("Logout Failed");
-            console.error(error);
-        }
-    };
+    //     } catch (error) {
+    //         console.log("Logout Failed");
+    //         console.error(error);
+    //     }
+    // };
       
     
     return (
@@ -47,7 +47,7 @@ function Header({ toggleMode, isLoggedIn, handleLogout }) {
                 </li>
                 <li>
                     {isLoggedIn ? (
-                        <Link to="/" onClick={handleLogoutClick}>Logout</Link>
+                        <Link to="/" onClick={handleLogout}>Logout</Link>
                     ) : (
                         <Link to="/auth">{toggleMode === "login" ? "Signup" : "Login"}</Link>
                     )}

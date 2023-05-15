@@ -69,10 +69,10 @@ function App() {
 						<Routes>
 							<Route exact path="/" element={<Home />} />
 							<Route path="/auth" element={<Auth handleLogin={handleLogin} />} />
-							<Route path="/about" element={<About />} isLoggedIn={isLoggedIn} />
+							<Route path="/about" element={<About />} />
 							<Route path="/dashboard" element={isLoggedIn ? <Dashboard sessionExpired={sessionExpired} /> : <Navigate to="/auth" />} />
 							<Route path="/create-product" element={isLoggedIn ? <CreateProduct sessionExpired={sessionExpired} /> : <Navigate to="/auth" />} />
-							<Route path="/view-product/:productId" element={isLoggedIn ? <ViewProduct handleLogin={handleLogin} /> : <Navigate to="/auth" />} />
+							<Route path="/view-product/:productId" element={<ViewProduct isLoggedIn={isLoggedIn} handleLogin={handleLogin} />} />
 							<Route path="/update-product/:productId" element={isLoggedIn ? <UpdateProduct handleLogin={handleLogin} /> : <Navigate to="/auth" />} />
 						</Routes>
 					</div>

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import '../styles/viewProduct.css'
 
-function ViewProduct() {
+function ViewProduct( isLoggedIn ) {
 
     const navigate = useNavigate();
 
@@ -52,21 +52,38 @@ function ViewProduct() {
     };
 
     return (
-        <div className='viewProduct'>
-            <div className='viewProduct-info'>
-                <div className='viewProduct-det'>
-                    <h1>{product.name}</h1>
-                    <p className='viewProduct-price'>Price: <span id='viewProduct-price'>${product.price}</span></p>
-                    <p className="viewProduct-desc" style={descriptionStyle}> {product.description} </p>
-                    <p className='viewProduct-cat'>Category: {product.category}</p>
-                    <p className='viewProduct-caount'>CountInStock: {product.countInStock}</p>
+        <div>
+            { !isLoggedIn ? (
+                <div className='viewProduct'>
+                    <div className='viewProduct-info'>
+                        <div className='viewProduct-det'>
+                            <h1>{product.name}</h1>
+                            <p className='viewProduct-price'>Price: <span id='viewProduct-price'>${product.price}</span></p>
+                            <p className="viewProduct-desc" style={descriptionStyle}> {product.description} </p>
+                            <p className='viewProduct-cat'>Category: {product.category}</p>
+                            <p className='viewProduct-caount'>CountInStock: {product.countInStock}</p>
+                        </div>
+                        <img src={product.image} alt={product.name} className='viewProduct-img' />
+                    </div>
+                    <div className='viewProduct-btn'>
+                        <button id='viewProduct-update' onClick={handleUpdateClick}>Update</button>
+                        <button id='viewProduct-delete' onClick={handleDeleteClick}>Delete</button>
+                    </div>
                 </div>
-                <img src={product.image} alt={product.name} className='viewProduct-img' />
-            </div>
-            <div className='viewProduct-btn'>
-                <button id='viewProduct-update' onClick={handleUpdateClick}>Update</button>
-                <button id='viewProduct-delete' onClick={handleDeleteClick}>Delete</button>
-            </div>
+                ) : (
+                <div className='viewProduct'>
+                    <div className='viewProduct-info'>
+                        <div className='viewProduct-det'>
+                            <h1>{product.name}</h1>
+                            <p className='viewProduct-price'>Price: <span id='viewProduct-price'>${product.price}</span></p>
+                            <p className="viewProduct-desc" style={descriptionStyle}> {product.description} </p>
+                            <p className='viewProduct-cat'>Category: {product.category}</p>
+                            <p className='viewProduct-caount'>CountInStock: {product.countInStock}</p>
+                        </div>
+                        <img src={product.image} alt={product.name} className='viewProduct-img' />
+                    </div>
+                </div>
+            )}
         </div>
     );
 }

@@ -11,6 +11,7 @@
 .viewProduct-info {
     display: flex;
     align-items: flex-start;
+    /* justify-content: start; */
     margin-bottom: 40px;
 }
   
@@ -37,7 +38,6 @@
     color: #1d3557;
     margin-bottom: 20px;
     font-size: 1rem;
-    /* text-align: justify; */
 }
   
 .viewProduct-cat,
