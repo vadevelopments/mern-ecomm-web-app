@@ -38,15 +38,21 @@ function Home() {
                 <h1>All Products</h1>
                 <div className='home-flush'>
                     {products.map((product) => (
-                        <ProductCard
-                        key={product._id}
-                        name={product.name}
-                        description={product.description}
-                        price={product.price}
-                        image={product.image}
-                        category={product.category}
-                        countInStock={product.countInStock}
-                        />
+                        <Link 
+                            to={{ pathname: `/view-product/${product._id}`}}
+                            key={product._id}
+                            onClick={() => localStorage.setItem("product", JSON.stringify(product))}
+                        >
+                            <ProductCard
+                                key={product._id}
+                                name={product.name}
+                                description={product.description}
+                                price={product.price}
+                                image={product.image}
+                                category={product.category}
+                                countInStock={product.countInStock} 
+                            />
+                        </Link>
                     ))}
                 </div>
             </div>

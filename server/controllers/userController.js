@@ -1,5 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const nodemailer = require('nodemailer');
 
 const User = require('../models/User');
 const ResetPassword = require('../models/ResetPassword');
@@ -126,7 +127,37 @@ exports.sendResetPasswordEmail = async (req, res) => {
         console.log("Token sent.")
         console.log(`Reset Token: ${token}`);
         // TODO: send email with reset password link containing token
-        res.json({ msg: 'Reset password email sent' });
+
+
+
+        // send email with reset password link containing token
+        const transporter = nodemailer.createTransport({
+            host: 'smtp.mailchimp.com',
+            port: 587,
+            auth: {
+                user: process.env.MAILCHIMP_USERNAME,
+                pass: process.env.MAILCHIMP_API
+            }
+        });
+        const mailOptions = {
+            from: process.env.MAILCHIMP_USERNAME,
+            to: user.email,
+            subject: 'Reset Password',
+            text: `Click the link below to reset your password:\n\n${process.env.CLIENT_URL}/reset-password/${token}`
+        };
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                console.error(error);
+                res.status(500).send('Failed to send reset password email');
+            } else {
+                console.log('Reset password email sent: ' + info.response);
+                res.json({ msg: 'Reset password email sent' });
+            }
+        });
+
+
+
+        // res.json({ msg: 'Reset password email sent' });
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server error');

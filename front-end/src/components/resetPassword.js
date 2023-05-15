@@ -18,10 +18,16 @@ export function ResetPassword({ setMode }) {
         setMode('signup');
     }
 
-    const toConfirmReset = () => {
-        setMode('confirmReset');
-    }
+    const toConfirmReset = (event) => {
+        event.preventDefault();
+        try {
+            // API: http://localhost:5000/api/users/reset-token
+            // Body: email
+            setMode('confirmReset');
+        } catch {
 
+        }
+    }
 
     return (
         <div class="reset-email-container">

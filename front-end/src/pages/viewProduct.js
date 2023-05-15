@@ -47,13 +47,17 @@ function ViewProduct() {
             });
     };
 
+    const descriptionStyle = {
+        whiteSpace: 'pre-line',
+    };
+
     return (
         <div className='viewProduct'>
             <div className='viewProduct-info'>
                 <div className='viewProduct-det'>
                     <h1>{product.name}</h1>
                     <p className='viewProduct-price'>Price: <span id='viewProduct-price'>${product.price}</span></p>
-                    <p className='viewProduct-desc'>{product.description}</p>
+                    <p className="viewProduct-desc" style={descriptionStyle}> {product.description} </p>
                     <p className='viewProduct-cat'>Category: {product.category}</p>
                     <p className='viewProduct-caount'>CountInStock: {product.countInStock}</p>
                 </div>

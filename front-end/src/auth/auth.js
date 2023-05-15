@@ -11,16 +11,6 @@ export function Auth({ handleLogin }) {
 
     const [mode, setMode] = useState('login');
 
-    // const toggleMode = () => {
-    //     if (mode === 'login') {
-    //         setMode('signup')
-    //     } else if (mode === 'signup') {
-    //         setMode('login')
-    //     } else if (mode === 'resetPassword') {
-    //         setMode('login')
-    //     }
-    // }
-
     const toSetMode = (newValue) => {
         setMode(newValue);
     }
