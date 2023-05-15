@@ -6,6 +6,7 @@ const connectDB = require('./db');
 const productRoutes = require('./routes/productRoutes');
 const userRoutes = require('./routes/userRoutes');
 const authRoutes = require('./routes/authRoutes');
+const reviewRoutes = require('./routes/reviewRoutes');
 
 dotenv.config();
 
@@ -19,6 +20,7 @@ app.use(express.json());
 app.use('/api/products', productRoutes); // for products
 app.use('/api/users', userRoutes);  // for users
 app.use('/api/auth', authRoutes); // for auth
+app.use('/api/review', reviewRoutes); // for review
 
 app.get('/', (req, res) => {
     res.send('Server is running');
