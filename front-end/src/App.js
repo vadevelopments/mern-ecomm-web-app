@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation  } from 'react-router-dom';
 import axios from 'axios';
 
 import './App.css';
@@ -13,11 +13,14 @@ import Dashboard from './pages/dashboard';
 import CreateProduct from './pages/createProduct';
 import ViewProduct from './pages/viewProduct';
 import UpdateProduct from './pages/updateProduct';
+import PageNotExist from './pages/pageNotExist';
 
-function App() {
+function App(  ) {
+
 	const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('token'));
 	const [mode, setMode] = useState('login');
-
+	const [path, setPath] = useState(''); //not used: To fix to get URL
+	
 	const toggleMode = () => {
 		setMode(mode === 'login' ? 'signup' : 'login');
 	};
@@ -29,6 +32,11 @@ function App() {
 	const sessionExpired = () => {
 		setIsLoggedIn(false);
 	};
+
+	//not used: To fix to get URL
+	const urlPath = ( path ) => {	
+		setPath(path);
+	}
 
 	const handleLogout = async () => {
 		try {
@@ -58,7 +66,6 @@ function App() {
 			console.error(error);
 		}
 	};	 
-	
 
 	return (
 		<div className="App">
@@ -67,12 +74,13 @@ function App() {
 					<Header toggleMode={toggleMode} isLoggedIn={isLoggedIn} handleLogout={handleLogout} />
 					<div className="content-container">
 						<Routes>
+							<Route path="*" element={<PageNotExist urlPath={urlPath}/>} /> Redirect to the PageNotExist page for any unmatched route
 							<Route exact path="/" element={<Home />} />
-							<Route path="/auth" element={<Auth handleLogin={handleLogin} />} />
+							<Route path="/auth" element={isLoggedIn ? <Navigate to="/dashboard" /> : <Auth handleLogin={handleLogin} />} />
 							<Route path="/about" element={<About />} />
 							<Route path="/dashboard" element={isLoggedIn ? <Dashboard sessionExpired={sessionExpired} /> : <Navigate to="/auth" />} />
 							<Route path="/create-product" element={isLoggedIn ? <CreateProduct sessionExpired={sessionExpired} /> : <Navigate to="/auth" />} />
-							<Route path="/view-product/:productId" element={<ViewProduct isLoggedIn={isLoggedIn} handleLogin={handleLogin} />} />
+							<Route path="/view-product/:productId" element={<ViewProduct handleLogin={handleLogin} urlPath={urlPath} />} />
 							<Route path="/update-product/:productId" element={isLoggedIn ? <UpdateProduct handleLogin={handleLogin} /> : <Navigate to="/auth" />} />
 						</Routes>
 					</div>

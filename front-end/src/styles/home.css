@@ -8,6 +8,12 @@
     background-color: #457b9d;
 }
 
+.home-owner {
+    border-radius: 20px;
+    background: radial-gradient(circle, #457b9d, #457b9d, #457b9d, #457b9d, #457b9d, #457b9d, #457b9d, #1d3557);
+    /* border: 2px solid black; */
+}
+
     .home h1 {
         margin: 0 10px;
         color: #f1faee;

@@ -9,6 +9,10 @@ import '../styles/home.css'
 
 function Home() {
 
+    const product = JSON.parse(localStorage.getItem("product"));
+    const token = JSON.parse(localStorage.getItem("token"));
+    // product.user === token.user.id
+
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
@@ -39,6 +43,7 @@ function Home() {
                 <div className='home-flush'>
                     {products.map((product) => (
                         <Link 
+                            // className={token && product.user === token.user.id ? "home-owner" : ""} // add background if it's the user's product
                             to={{ pathname: `/view-product/${product._id}`}}
                             key={product._id}
                             onClick={() => localStorage.setItem("product", JSON.stringify(product))}

@@ -12,26 +12,7 @@ function Header({ toggleMode, isLoggedIn, handleLogout }) {
         const token = JSON.parse(localStorage.getItem('token'));
         {token ? setUser(`Hi ${token.user.email}`) : setUser('Hi!')}
     }, [isLoggedIn]);
-    
 
-    // const handleLogoutClick = async (event) => {
-    //     event.preventDefault();
-    //     try {
-    //         setUser('Hi!')
-
-    //         // Update the isLoggedIn state
-    //         handleLogout();
-
-    //         // Redirect to the home
-    //         navigate('/auth');
-    
-    //     } catch (error) {
-    //         console.log("Logout Failed");
-    //         console.error(error);
-    //     }
-    // };
-      
-    
     return (
         <nav>
             <div className="header-logo">
