@@ -15,18 +15,15 @@ function Dashboard({ sessionExpired }) {
     useEffect(() => {
             axios
             .get('http://localhost:5000/api/products/userProducts',{
-                headers: {
-                    "x-auth-token": token.token,
-                    "Content-Type": "application/json",
+                params: {
+                  userId: token.user.id, // Pass the user ID from the token
                 },
             })
             .then((res) => {
-                console.log('dashboard try');
                 setUserProducts(res.data);
                 setIsLoading(false);
             })
             .catch((err) => {
-                console.log('dashboard catch');
                 if(err.response.status === 401){
                     sessionExpired();
                     window.alert(`Session expired. Please log in again.`);

@@ -122,9 +122,8 @@ async function deleteProductById(req, res) {
 // Get all user's products
 async function getUserProducts(req, res) {
 	try{
-		const userId = req.user.id;
+		const userId = req.query.userId;
 		const products = await Product.find({ user: userId });
-		// console.log(products);
 		res.json(products);
 	} catch {
 		res.status(500).json({ errorMsg: "Connection to getUserProducts failed", error: 'Server error' });
