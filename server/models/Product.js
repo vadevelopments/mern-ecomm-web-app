@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const User = require('./User');
 
 const productSchema = new mongoose.Schema(
     {
@@ -26,6 +27,15 @@ const productSchema = new mongoose.Schema(
                     ref: 'User',
                     required: true,
                 },
+                name: {
+                    type: String,
+                    default: function () {
+                        if (this.user && this.user.name) {
+                            return this.user.name;
+                        }
+                        return this.user.email;
+                    },
+                },            
                 text: {
                     type: String,
                     required: true,
@@ -45,7 +55,6 @@ const productSchema = new mongoose.Schema(
 productSchema.statics.getAllProducts = async function () {
     try {
 		const products = await this.find().exec();
-		console.log('Fetched products from database');
 		return products;
     } catch (err) {
 		console.error(err);

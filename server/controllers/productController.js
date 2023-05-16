@@ -1,5 +1,7 @@
 const Joi = require('joi');
-const Product = require('../models/product');
+const Product = require('../models/Product');
+const User = require('../models/User');
+
 
 async function getAllProducts(req, res) {
 	try {
@@ -133,6 +135,7 @@ async function getUserProducts(req, res) {
 async function addCommentToProduct(req, res) {
     try {
         const { productId, text } = req.body;
+		console.log(`commentor name: ${req.user.name}`);
 
         const product = await Product.findById(productId).exec();
 
@@ -142,6 +145,7 @@ async function addCommentToProduct(req, res) {
 
         const comment = {
             user: req.user.id,
+            name: req.user.name || req.user.email,
             text,
             createdAt: Date.now(),
         };
@@ -176,4 +180,5 @@ async function removeCommentFromProduct(req, res) {
 };
 
 
-module.exports = { getAllProducts, getProductById, createProduct, updateProductById, deleteProductById, getUserProducts, addCommentToProduct, removeCommentFromProduct };
+module.exports = { getAllProducts, getProductById, createProduct, updateProductById, deleteProductById,
+				getUserProducts, addCommentToProduct, removeCommentFromProduct };
