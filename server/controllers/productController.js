@@ -131,4 +131,50 @@ async function getUserProducts(req, res) {
 	}
 } 
 
-module.exports = { getAllProducts, getProductById, createProduct, updateProductById, deleteProductById, getUserProducts };
+async function addCommentToProduct(req, res) {
+    try {
+        const { productId, text } = req.body;
+
+        const product = await Product.findById(productId).exec();
+
+        if (!product) {
+            return res.status(404).json({ error: 'Product not found' });
+        }
+
+        const comment = {
+            user: req.user.id,
+            text,
+            createdAt: Date.now(),
+        };
+
+        product.addComment(comment);
+
+        res.status(201).json({ message: 'Comment added to product successfully.' });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Server error' });
+    }
+};
+
+async function removeCommentFromProduct(req, res) {
+    try {
+        const { productId, commentId } = req.body;
+
+		const product = await Product.findById(productId).exec();
+
+		if (!product) {
+			return res.status(404).json({ error: 'Product not found' });
+		}
+
+		await product.removeComment(commentId);
+
+		console.log('Comment removed from product successfully.');
+		res.status(200).json({ message: 'Comment removed from product successfully.' });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Server error' });
+    }
+};
+
+
+module.exports = { getAllProducts, getProductById, createProduct, updateProductById, deleteProductById, getUserProducts, addCommentToProduct, removeCommentFromProduct };

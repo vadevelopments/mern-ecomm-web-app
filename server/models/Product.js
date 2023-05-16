@@ -19,13 +19,29 @@ const productSchema = new mongoose.Schema(
                 ref: 'Review',
             },
         ],
+        comments: [
+            {
+                user: {
+                    type: mongoose.Schema.Types.ObjectId,
+                    ref: 'User',
+                    required: true,
+                },
+                text: {
+                    type: String,
+                    required: true,
+                },
+                createdAt: {
+                    type: Date,
+                    default: Date.now,
+                },
+            },
+        ],
     },
     {
         timestamps: true,
     }
 );
   
-
 productSchema.statics.getAllProducts = async function () {
     try {
 		const products = await this.find().exec();
@@ -70,6 +86,34 @@ productSchema.statics.deleteProductById = async function (productId) {
     } catch (err) {
         console.error(err);
         throw new Error(`Error deleting product with id ${productId}`);
+    }
+};
+
+productSchema.methods.addComment = async function (commentData) {
+    try {
+        this.comments.push(commentData);
+        await this.save();
+        console.log('Comment added to product successfully');
+    } catch (err) {
+        console.error(err);
+        throw new Error('Error adding comment to product');
+    }
+};
+
+productSchema.methods.removeComment = async function (commentId) {
+    try {
+
+        // This is called "atomic update" approach on mongodb were server of database performs the manipulation af data.
+        // Use the $pull operator to remove the comment by its _id
+        await this.updateOne({ $pull: { comments: { _id: commentId } } });
+
+        // This is called JavaScript's array filtering approach. Application fetches all the data in database and send again with the updated data. Atomic approach is better.
+        // this.comments = this.comments.filter((comment) => !mongoose.Types.ObjectId(comment._id).equals(commentId));
+
+        await this.save();
+    } catch (err) {
+        console.error(err);
+        throw new Error('Error removing comment from product');
     }
 };
 
