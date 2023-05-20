@@ -7,6 +7,7 @@ const productRoutes = require('./routes/productRoutes');
 const userRoutes = require('./routes/userRoutes');
 const authRoutes = require('./routes/authRoutes');
 const reviewRoutes = require('./routes/reviewRoutes');
+const cartRoutes = require('./routes/cartRoutes');
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ app.use('/api/products', productRoutes); // for products
 app.use('/api/users', userRoutes);  // for users
 app.use('/api/auth', authRoutes); // for auth
 app.use('/api/review', reviewRoutes); // for review
+app.use('/api/cart', cartRoutes); // for cart
 
 app.get('/', (req, res) => {
     res.send('Server is running');

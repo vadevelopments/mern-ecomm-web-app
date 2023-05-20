@@ -77,7 +77,11 @@ function ViewProduct() {
 					<p className="viewProduct-cat">Category: {product.category}</p>
 					<p className="viewProduct-caount">CountInStock: {product.countInStock}</p>
 				</div>
-				<img src={product.image} alt={product.name} className="viewProduct-img" />
+				<div>
+					<img src={product.image} alt={product.name} className="viewProduct-img" />
+					<button>Add to cart</button>
+					<button>But now</button>
+				</div>
 			</div>
 			{owner && (
 				<div className="viewProduct-btn">
@@ -90,12 +94,13 @@ function ViewProduct() {
 				</div>
 			)}
 			<div className="viewProduct-comments">
+				<h4>Comments</h4>
 				{product.comments.length > 0 &&
 					product.comments.map((comment, index) => (
 						<div key={index}>
-							<p>Commentor: {comment.name}</p>
-							<p>Comment Comment Comment: {comment.text}</p>
-							<p>Created at: {formatTime(comment.createdAt)}</p>
+							<p id='viewProduct-Commentor'>Commentor: {comment.name}</p>
+							<p id='viewProduct-comment'>Comment Comment Comment: {comment.text}</p>
+							<p id='viewProduct-created'>Created at: {formatTime(comment.createdAt)}</p>
 						</div>
 				))}
 			</div>

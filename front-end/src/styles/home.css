@@ -32,6 +32,7 @@
 
         .home-flush a {
             display: inline-flex;
+            text-decoration: none;
         }
 
             .home-flush a:hover {
