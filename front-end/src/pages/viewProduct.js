@@ -9,6 +9,7 @@ import '../styles/viewProduct.css';
 function ViewProduct() {
 	const navigate = useNavigate();
 	const [owner, setOwner] = useState(false);
+	const [quantity, setQuantity] = useState(1);
 
 	const product = JSON.parse(localStorage.getItem('product'));
 	const token = JSON.parse(localStorage.getItem('token'));
@@ -16,7 +17,6 @@ function ViewProduct() {
 
 	useEffect(() => {
 		checkOwner();
-
 	}, []);
 
 	const checkOwner = () => {
@@ -63,6 +63,23 @@ function ViewProduct() {
 		whiteSpace: 'pre-line',
 	};
 
+	const handleQuantityChange = (event) => {	
+		setQuantity(event.target.value);
+	};
+	// useEffect(() => {
+	// 	console.log(quantity);
+	// }, [quantity]);
+
+	const addToCart = (event) => {
+		event.preventDefault()
+
+	}
+	
+	const buyNow = (event) => {
+		event.preventDefault()
+
+	}
+
 	return (
 		<div className="viewProduct">
 			<div className="viewProduct-info">
@@ -75,12 +92,18 @@ function ViewProduct() {
 						{product.description}
 					</p>
 					<p className="viewProduct-cat">Category: {product.category}</p>
-					<p className="viewProduct-caount">CountInStock: {product.countInStock}</p>
+					<p className="viewProduct-count">CountInStock: {product.countInStock}</p>
 				</div>
-				<div>
+				<div className='viewProduct-cartBtn'>
 					<img src={product.image} alt={product.name} className="viewProduct-img" />
-					<button>Add to cart</button>
-					<button>But now</button>
+					{token && (
+						<form action="#">
+							<label for="quantity">Quantity:</label>
+							<input className='cartInput' type="number" id="quantity" name="quantity" onChange={handleQuantityChange} min={1} value={quantity}/>
+							<input className='cartBtn' type="submit" onClick={addToCart} value="Add to cart"/>
+							<input className='cartBtn' type="submit" onClick={buyNow} value="Buy now"/>
+						</form>
+					)}
 				</div>
 			</div>
 			{owner && (
@@ -104,7 +127,6 @@ function ViewProduct() {
 						</div>
 				))}
 			</div>
-
 		</div>
 	);
 }
