@@ -6,6 +6,8 @@
 .home {
     padding: 20px;
     background-color: #457b9d;
+    min-width: 320px;
+    max-width: 1200px;
 }
 
 .home-owner {
