@@ -126,10 +126,8 @@ exports.sendResetPasswordEmail = async (req, res) => {
         await resetPassword.save();
         console.log("Token sent.")
         console.log(`Reset Token: ${token}`);
-        // TODO: send email with reset password link containing token
 
-
-
+        // using Mamilchimp
         // send email with reset password link containing token
         const transporter = nodemailer.createTransport({
             host: 'smtp.mailchimp.com',
@@ -155,9 +153,36 @@ exports.sendResetPasswordEmail = async (req, res) => {
             }
         });
 
+        
+        // // using Gmail
+        // // send email with reset password link containing token
+        // // Create a transporter using Gmail SMTP
+        // const transporter = nodemailer.createTransport({
+        //     service: 'gmail',
+        //     auth: {
+        //         user: process.env.GMAIL_USERNAME,
+        //         pass: process.env.GMAIL_API
+        //     }
+        // });
 
+        // // Prepare the email message
+        // const mailOptions = {
+        //     from: 'afpaduelan@gmail.com',
+        //     to: user.email,
+        //     subject: 'Reset Password',
+        //     text: `Click the link below to reset your password:\n\n${process.env.CLIENT_URL}/reset-password/${token}`
+        // };
 
-        // res.json({ msg: 'Reset password email sent' });
+        // Send the email
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+            console.error(error);
+            return res.status(500).send('Failed to send reset password email');
+            } else {
+            console.log('Reset password email sent: ' + info.response);
+            res.json({ msg: 'Reset password email sent' });
+            }
+        });
     } catch (err) {
         console.error(err.message);
         res.status(500).send('Server error');
